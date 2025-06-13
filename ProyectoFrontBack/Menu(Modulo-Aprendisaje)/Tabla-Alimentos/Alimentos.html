@@ -6,161 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla - Alimentos</title>
     <link rel="stylesheet" href="Alimentos.css">
-    <style>
-        body {
-            background-color: rgba(19, 31, 36, 1);
-            color: #fff;
-            font-family: sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            position: relative;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .title {
-            font-size: 3.3em;
-            margin-bottom: 10px;
-            margin-top: 0.05px;
-            color: #8a2be2;
-        }
-
-        input {
-            padding: 10px;
-            border: none;
-            border-radius: 50px;
-            background-color: #fff;
-            color: #000;
-        }
-
-        .image-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .image-container img {
-            width: 400px;
-            height: 400px;
-            border-radius: 100px;
-        }
-
-        .image-text {
-            color: #fff;
-            font-size: 1.5em;
-            text-align: center;
-            margin-top: 10px;
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-   
-        .footer::before, .footer::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid #fff;
-            margin: 0 10px;
-        }
-
-        .menu {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr); /* 6 columnas */
-            gap: 10px;
-            justify-items: center;
-            align-items: center;
-        }
-
-        .menu-item {
-            background-color: rgba(19, 31, 36, 1); /* Color de fondo */
-            padding: 10px; /* Espaciado interno */
-            border-radius: 10px; /* Borde redondeado */
-            text-align: center;
-            width: 160px; /* Ancho del botón */
-            height: 80px; /* Alto del botón */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 6px rgb(255, 255, 255); /* Sombra */
-            transition: transform 0.1s; /* Transición al hacer hover */
-        }
-
-        .menu-item:hover {
-            transform: scale(1.35); /* Escalar al hacer hover */
-        }
-
-        .menu-item h3 {
-            font-size: 3.1em; /* Tamaño del texto */
-            margin: 0;
-            color: #ffffff; /* Color del texto */
-        }
-        .footer {
-            display: flex;
-            justify-content: space-around; /* Distribuir los elementos uniformemente */
-            align-items: center;
-            background-color: #111; /* Color de fondo */
-            width: 100%;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-        }
-
-        .footer-item {
-            background-color: #111; /* Color de fondo */
-            padding: 10px; /* Espaciado interno */
-            border-radius: 5px; /* Borde redondeado */
-            text-align: center;
-            align-items: center;
-        }
-
-        .footer-item img {
-            width: 30px;
-            height: 30px;
-            vertical-align: middle;
-            margin-right: 10px; /* Espacio entre la imagen y el texto opcional */
-        }
-
-        .footer-item span {
-            color: #fff; /* Color del texto */
-            font-size: 16px; /* Tamaño de fuente */
-        }
-
-        .footer-item img {
-            width: 50px;
-            height: 50px;
-        }
-
-        .footer-item span {
-            margin-left: 100px;
-            color: #fff;
-            font-size: 16px;
-        }
-        
-        .logo {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-
-        .logo img {
-            width: 400px;
-            height: auto;
-        }
-    </style>
 </head>
 <body>
     <div class="logo">
@@ -169,43 +14,38 @@
         <h1 class="title">¡APRENDAMOS A EXPRESAR LOS ALIMENTOS!</h1>
         <input type="text" placeholder="Haz click en el Alimento a aprender">
         <div class="image-container" id="imageContainer">
-            <img id="imagenDinamica" src="../iconos/logo sigma.PNG" alt="Alimento error imagen" style="width: 400px; height: 400px; border-radius: 100px;">
+            <img id="imagenDinamica" src="../iconos/logo sigma.PNG" alt="Alimento error imagen">
         </div>
         <div class="image-text">ALIMENTOS</div>
         <div class="menu">
-            <button class="menu-item" onclick="cambiarImagen('Ajo')"><h3>Ajo</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('Cebolla')"><h3>Cebolla</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('Uva')"><h3>Uva</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('Cereza')"><h3>Cereza</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('Chile')"><h3>Chile</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('Tomate')"><h3>Tomate</h3></button>
+            <button class="menu-item" onclick="cambiarImagen('Ajo')"><h3>ajo</h3></button>
+            <button class="menu-item" onclick="cambiarImagen('Cebolla')"><h3>cebolla</h3></button>
+            <button class="menu-item" onclick="cambiarImagen('Uva')"><h3>uva</h3></button>
+            <button class="menu-item" onclick="cambiarImagen('Cereza')"><h3>cereza</h3></button>
+            <button class="menu-item" onclick="cambiarImagen('Chile')"><h3>chile</h3></button>
+            <button class="menu-item" onclick="cambiarImagen('Tomate')"><h3>tomate</h3></button>
         </div>
-        <div class="footer">
-            <div class="footer-bar">
-                <a href="../Menu(Modulo-Aprendisaje)/Menu.html">
-                    <button class="footer-item">
-                        <img src="../iconos/homa.png" alt="Home">
-                    </button>
-                </a>
-                <a href="../Menu(Modulo-Aprendisaje)/Menu.html">
-                    <button class="footer-item">
-                        <img src="../iconos/menu.png" alt="Menu">
-                    </button>
-                </a>
+    </div>
 
-                <a href="http://127.0.0.1:5000/alimentos">
+    <div class="footer">
+        <div class="footer-bar">
+            <a href="../Menu.html">
                 <button class="footer-item">
-                    <img src="../iconos/camara.png" alt="Camera">
+                    <img src="../iconos/homa.png" alt="Home">
                 </button>
-                </a>
-            </div>
+            </a>
+            <a href="http://127.0.0.1:5000/alimentos">
+            <button class="footer-item">
+                <img src="../iconos/camara.png" alt="Camera">
+            </button>
+            </a>
         </div>
     </div>
 
     <script>
         function cambiarImagen(alimento) {
             var imagen = document.getElementById('imagenDinamica');
-            imagen.src = 'Alimentos/mano-' + alimento + '.png';
+            imagen.src = 'Alimento/mano-' + alimento + '.png';
         }
     </script>
 </body>
