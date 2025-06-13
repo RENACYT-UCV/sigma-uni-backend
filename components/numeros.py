@@ -1,0 +1,78 @@
+import cv2
+from .utils import BaseDetector
+
+class NumerosDetector(BaseDetector):
+    """Detector de números en lenguaje de señas"""
+    
+    def __init__(self):
+        super().__init__()
+
+        self.numeros_config = {
+            "Número - 5": [1, 1, 1, 1, 1, 1],  # Puño cerrado
+            "Número - 4": [1, 1, 0, 1, 1, 1],  # Solo índice extendido
+            "Número - 3": [1, 1, 0, 0, 1, 1],  # Índice y medio extendidos
+            "Número - 2": [1, 1, 0, 0, 0, 1],  # Índice, medio y anular extendidos
+            "Número - 1": [1, 1, 0, 0, 0, 0],  # Cuatro dedos extendidos (sin pulgar)
+            "Número - 0": [0, 0, 0, 0, 0, 0],  # Todos los dedos extendidos xd
+            "Número - 6": [0, 1, 1, 1, 1, 0],  # Pulgar y meñique extendidos
+            "Número - 7": [0, 1, 0, 1, 1, 0],  # Pulgar, índice y meñique extendidos
+            "Número - 8": [0, 1, 0, 0, 1, 0],  # Pulgar, índice, medio y meñique extendidos
+            "Número - 9": [0, 1, 0, 0, 0, 0],  # Todos extendidos excepto anular
+        }
+    
+    def detect_number(self, dedos, frame):
+        """Detectar número basado en configuración de dedos"""
+        font = self.get_font(70)  
+        
+        correct_color = (0, 255, 0)  # Verdecito
+        incorrect_color = (250, 128, 114)  # Rojo
+        color = incorrect_color
+        numero_detectado = 'Identificando número...'
+
+        for numero, config in self.numeros_config.items():
+            if dedos == config:
+                color = correct_color
+                numero_detectado = numero
+                print(numero)
+                break
+
+        return self.utils.draw_detection_box(frame, numero_detectado, color, font)
+    
+    def generate_video(self):
+        """Generar stream de video para detección de números"""
+        with self.utils.mp_hands.Hands(
+            static_image_mode=False,
+            max_num_hands=2,
+            min_detection_confidence=0.75) as hands, \
+             self.utils.mp_pose.Pose(min_detection_confidence=0.75) as pose, \
+             self.utils.mp_face_mesh.FaceMesh(min_detection_confidence=0.75) as face_mesh:
+            
+            while True:
+                ret, frame = self.cap.read()
+                if not ret:
+                    break
+
+                height, width, _ = frame.shape
+                frame = cv2.flip(frame, 1)
+                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                
+                # Procesar con MediaPipe
+                results = hands.process(frame_rgb)
+                pose_results = pose.process(frame_rgb)
+                face_mesh_results = face_mesh.process(frame_rgb)
+
+                if results.multi_hand_landmarks:
+                    angulosid = self.utils.obtener_angulos(results, width, height)
+                    dedos = self.process_finger_angles(angulosid)
+                    
+                    # Detectar números
+                    frame = self.detect_number(dedos, frame)
+
+                # Dibujar landmarks
+                frame = self.utils.draw_landmarks(frame, results, pose_results, face_mesh_results)
+
+                ret, buffer = cv2.imencode('.jpg', frame)
+                frame = buffer.tobytes()
+
+                yield (b'--frame\r\n'
+                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
