@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4a56a5ef-0ea6-4931-875c-b618a8233ce5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/casa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/comprobado.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/examen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/index3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/indext2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/prueba.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/sigma.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Abecedario/templates/static/peluche.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/casa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/comprobado.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/examen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/index3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/indext2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/prueba.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/sigma.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alimentos/templates/static/peluche.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/casa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/comprobado.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/examen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/index3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/indext2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/prueba.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/sigma.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frases/templates/static/peluche.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Imagenes/Error1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Imagenes/Fondo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Imagenes/SIGMA.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Imagenes/correo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Imagenes/gmail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Imagenes/login.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Imagenes/ver.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/admin-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/admin-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/admin-search.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/admin-search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/avatars/AdminFemaleAvatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/avatars/AdminMaleAvatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/avatars/StudetFemaleAvatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/avatars/StudetMaleAvatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/avatars/TeacherFemaleAvatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/avatars/TeacherMaleAvatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/book/book-cover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/book/book-default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/icons/mCSB_buttons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/img/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/img/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/img/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/img/login.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/assets/img/sideBar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/Material-Design-Iconic-Font.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/Material-Design-Iconic-Font.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/Material-Design-Iconic-Font.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/Material-Design-Iconic-Font.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/Material-Design-Iconic-Font.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/robotocondensed-light.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/robotocondensed-light.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/robotocondensed-light.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/robotocondensed-light.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/robotocondensed-light.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/robotocondensed-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/robotocondensed-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/robotocondensed-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/robotocondensed-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/fonts/robotocondensed-regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/my-account.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/my-account.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/my-data.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/my-data.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/prueba.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/prueba.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/user_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/user_list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/user_search.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/administrador/user_search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Login_Admin/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Alimentos/Alimentos/logo sigmoso.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Alimentos/Alimentos/mano-ajo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Alimentos/Alimentos/mano-cebolla.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Alimentos/Alimentos/mano-cereza.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Alimentos/Alimentos/mano-chile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Alimentos/Alimentos/mano-tomate.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Alimentos/Alimentos/mano-uva.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/logo sigma.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/logo sigmoso.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-A.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-A.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-B.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-B.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-C.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-C.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-E.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-E.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-F.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-F.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-G.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-G.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-H.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-H.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-I.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-I.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-J.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-K.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-K.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-L.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-L.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-M.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-M.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-N.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-N.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-O.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-O.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-P.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-P.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-Q.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-Q.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-R.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-R.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-S.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-S.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-T.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-T.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-U.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-U.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-V.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-V.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-W.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-W.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-X.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-X.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-Y.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-Y.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-Z.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-Z.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-Ñ.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Avecedario/letras/mano-Ñ.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Frases/frases/mano-letra-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Frases/frases/mano-letra-1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Frases/frases/mano-letra-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Frases/frases/mano-letra-2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/alfabeto.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/logo sigma.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/logo sigmoso.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-0.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-10.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-4.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-5.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-6.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-7.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-8.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-9.png" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/numeros/mano-9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/Menu(Modulo-Aprendisaje)/Tabla-Numeros/salida.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/PerfiUsu_Progreso/StudetMaleAvatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/PerfiUsu_Progreso/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/PerfiUsu_Progreso/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/estilos/codigo.css" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/estilos/codigo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/estilos/contra.css" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/estilos/contra.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nueva_Prueba/estilos/correo.css" beforeDir="false" afterPath="$PROJECT_DIR$/Nueva_Prueba/estilos/correo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/casa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/comprobado.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/examen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/index3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/indext2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/prueba.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/sigma.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Numero/templates/static/peluche.gif" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2xjDuV6vTjh6jjbRxIFdnPWtgGj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/ALEX/Downloads/5-20250528T074251Z-1-001/5/Corregido modulos/Modulo 1 Login/01 Código fuente/01 Código fuente/ProyectoSigma"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4a56a5ef-0ea6-4931-875c-b618a8233ce5" name="Changes" comment="" />
+      <created>1748442812020</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1748442812020</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Frases</title>
+    <link rel="stylesheet" href="frases.css">
+    <style>
+        body {
+            background-color: rgba(19, 31, 36, 1);
+            color: #fff;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 3.3em;
+            margin-bottom: 10px;
+            margin-top: 0.05px;
+            color:#8a2be2;
+            text-align: center;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 100px;
+        }
+
+        .footer::before, .footer::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #fff;
+            margin: 0 10px;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+            gap: 10px;
+            justify-items: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .menu-item {
+            background-color: rgba(19, 31, 36, 1); 
+            padding: 10px; 
+            border-radius: 10px; 
+            text-align: center;
+            width: 160px; 
+            height: 80px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1); 
+            transition: transform 0.2s; 
+        }
+
+        .menu-item:hover {
+            transform: scale(1.1); 
+        }
+
+        .menu-item h3 {
+            font-size: 2em; 
+            margin: 0;
+            color: #fff; 
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-around; 
+            align-items: center;
+            background-color: #111; 
+            width: 100%;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-item {
+            background-color: #111; 
+            padding: 10px; 
+            border-radius: 5px; 
+            text-align: center;
+            align-items: center;
+        }
+
+        .footer-item img {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            margin-right: 10px; 
+        }
+
+        .footer-item span {
+            color: #fff; 
+            font-size: 16px; 
+        }
+
+        .footer-item img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .footer-item span {
+            margin-left: 100px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .logo img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .title {
+                font-size: 2em;
+            }
+
+            .menu-item {
+                width: 100px;
+                height: 60px;
+            }
+
+            .menu-item h3 {
+                font-size: 1.5em;
+            }
+
+            .footer-item img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+  
+    <div class="container">
+        <h1 class="title">¡APRENDAMOS ALGUNAS FRASES!</h1>
+        <div class="image-container" id="imageContainer">
+            <img src="logo sigma.png" class="imagen-letra" id="logoImagen">
+        </div>
+        <div class="menu">
+            <button class="menu-item" onclick="cambiarImagen('1')"><h3>Hola</h3></button>
+            <button class="menu-item" onclick="cambiarImagen('2')"><h3>Te amo</h3></button>
+        </div>
+        <div class="footer">
+            <div class="footer-bar">
+                <a href="../../../flask_opencv/flask_opencv/templates/indext2.html">
+                    <button class="footer-item">
+                        <img src="../iconos/homa.png" alt="Home">
+                    </button>
+                    <a href="../Menu.html">
+                        <button class="footer-item">
+                            <img src="../iconos/menu.png" alt="Menu">
+                        </button>
+                    </a>
+
+                <a href="http://127.0.0.1:5000/frases">
+                    <button class="footer-item">
+                        <img src="../iconos/camara.png" alt="Camera">
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function cambiarImagen(valor) {
+            var imageContainer = document.getElementById('imageContainer');
+            imageContainer.innerHTML = ''; 
+            var nuevaImagen = document.createElement('img');
+            nuevaImagen.src = 'frases/mano-letra-' + valor + '.png'; 
+            nuevaImagen.className = 'imagen-letra';
+            imageContainer.appendChild(nuevaImagen);
+        }
+
+        document.getElementById('letraInput').addEventListener('input', function() {
+            var imageContainer = document.getElementById('imageContainer');
+            imageContainer.innerHTML = ''; 
+            var palabra = this.value.trim();
+            for (var i = 0; i < palabra.length; i++) {
+                if (!isNaN(palabra[i]) && palabra[i] !== ' ') { 
+                    var nuevaImagen = document.createElement('img');
+                    nuevaImagen.src = 'frases/mano-letra-' + palabra[i] + '.png'; 
+                    nuevaImagen.className = 'imagen-letra';
+                    imageContainer.appendChild(nuevaImagen);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
