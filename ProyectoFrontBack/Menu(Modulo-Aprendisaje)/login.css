@@ -114,7 +114,7 @@ input {
     border-radius: 8px;
 }
 
-.login-btn {
+.login-btn, .register-btn {
     padding: 12px;
     background: #000;
     color: white;
