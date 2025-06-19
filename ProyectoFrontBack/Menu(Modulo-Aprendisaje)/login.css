@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     background-color: #f5f7fa;
 }
@@ -20,29 +20,32 @@ body {
     background: white;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    height: 100%;
+    height: 100vh;
 }
 
 .left-panel {
     background: linear-gradient(135deg, #7352c0, #2f024b);
     color: white;
     width: 50%;
-    padding: 30px 100px;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    padding: 0px 50px;
+    box-sizing: border-box;
+    position: relative;
 }
 
-.centro{
+.centro {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 50%;
-    color: white;
+    gap: 20px;
+    height: 25%;
 }
 
 .left-panel .centro h1 {
-    font-size: 4rem;
+    font-size: 3rem;
     margin: 20px 0;
+    font-size: 3vw;
 }
 
 .left-panel .centro h1 span {
@@ -51,8 +54,9 @@ body {
 }
 
 .left-panel p {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     line-height: 1.5;
+    font-size: 1.5vw
 }
 
 .left-panel footer {
@@ -60,16 +64,17 @@ body {
     opacity: 0.8;
     text-align: center;
     margin-top: auto;
+    height: 5%;
 }
 
 .left-panel img {
     width: 80%;
     margin: 20px auto;
-
+    height: 60%;
 }
 
+/* Right Panel */
 .right-panel {
-    flex: 1;
     padding: 170px;
     width: 50%;
     display: flex;
@@ -178,7 +183,6 @@ input {
     }
 }
 
-
 @media (max-width: 590px) {
     .left-panel{
         padding: 30px;
@@ -188,7 +192,6 @@ input {
         padding: 40px 40px;
     }
 }
-
 
 @media (max-width: 480px) {
     .right-panel h2{
