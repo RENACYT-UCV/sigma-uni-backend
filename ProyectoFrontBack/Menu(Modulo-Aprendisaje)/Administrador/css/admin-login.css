@@ -121,6 +121,11 @@ footer {
     padding-top: 20px;
 }
 
+#olvidecontra{
+    text-align: left;
+    margin-top: 30px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 480px) {
     .panel-center {
