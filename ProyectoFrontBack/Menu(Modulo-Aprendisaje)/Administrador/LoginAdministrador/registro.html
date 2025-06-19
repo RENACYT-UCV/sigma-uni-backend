@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/admin-login.css" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Register Administrador</title>
+</head>
+
+<body>
+    <div class="panel-center">
+        <img src="../../iconos/user.png" alt="User">
+        <h2>Register Administrador</h2>
+        <p>Registrate para que puedas iniciar sesión</p>
+
+        <form action="registro.php" method="POST">
+                <label for="nombre_completo">Nombre Completo</label>
+                <input type="text" placeholder="Jose Mendi Campos" name="nombre_completo" required>
+                <label for="correo">Correo Electronico</label>
+                <input type="text" placeholder="josemendi@gmail.com" name="correo" required>
+                <label for="usuario">Usuario</label>
+                <input type="text"  id="" placeholder="JoMeCampoPro" name="usuario" required>
+                <label for="contrasena">Contraseña</label>
+                <input type="password" placeholder="***********" name="contrasena" required>
+            <button class="login" type="submit">Registrar</button>
+            <a href="loginAdmin.html">Ya tienes una cuenta</a>
+        </form>
+        <footer>© 2025 Sigma. Todos los derechos reservados.</footer>
+    </div>
+</body>
+</html>
