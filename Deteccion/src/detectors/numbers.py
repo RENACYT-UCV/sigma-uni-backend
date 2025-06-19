@@ -20,7 +20,10 @@ class NumberDection:
     }
 
     def __init__(self, detector: Dectector):
-        self.detector = detector if isinstance(detector, Dectector) else Dectector()
+        if not detector or not isinstance(detector, Dectector):
+            raise ValueError("A detector instance is required.")
+
+        self.detector = detector
 
     def match_fingers(self, input_fingers, target_fingers, tolerance=1):
         return sum(abs(a - b) for a, b in zip(input_fingers, target_fingers)) <= tolerance
