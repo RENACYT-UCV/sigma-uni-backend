@@ -1,6 +1,7 @@
 import cv2
 from .utils import BaseDetector
 
+
 class AlimentosDetector(BaseDetector):
     """Detector de alimentos en lenguaje de señas"""
     

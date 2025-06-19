@@ -1,6 +1,7 @@
 import cv2
 from .utils import BaseDetector
 
+
 class FrasesDetector(BaseDetector):
     """Detector de frases en lenguaje de señas"""
     

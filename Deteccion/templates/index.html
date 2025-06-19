@@ -6,11 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video</title>
     <style>
-        /* General Styles */
         body {
-            background-color: rgba(19, 31, 36, 1);
-            background-image: url('static/sigma.jpg');
-            background-size: cover;
+            background-color: #131f24; /* Color de fondo sólido */
             margin: 0;
             font-family: Arial, sans-serif;
         }
@@ -21,121 +18,59 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            color: white; /* Color de texto para todo el contenido dentro de .container */
-            padding: 20px; /* Padding for better mobile view */
+            color: white;
+            padding: 20px;
         }
 
         .content {
-            text-align: center; /* Alineación del contenido centrada */
+            text-align: center;
         }
 
         h1 {
-            color: #0dce71; /* Color verde para el título h1 */
+            color: #0dce71;
         }
 
         footer .ter-button,
         footer .camera-button {
-            background-color: #6c5ce7; /* Purple color */
+            background-color: #6c5ce7;
             border: none;
             padding: 15px;
             border-radius: 10px;
             cursor: pointer;
-            margin: 10px; /* Margin between buttons */
+            margin: 10px;
             color: white;
             font-size: 16px;
-            width: 100%; /* Full width buttons on mobile */
+            width: 100%;
         }
 
-        /* Estilos para la imagen del video */
         .content img {
-            border: 5px solid #c3ead7; /* Borde sólido de color verde */
-            border-radius: 10px; /* Bordes redondeados */
-            max-width: 100%; /* Asegura que la imagen no supere su contenedor */
+            border: 5px solid #c3ead7;
+            border-radius: 10px;
+            max-width: 100%;
         }
 
-        /* Estilos para la animación del peluche */
-        .peluche {
-            position: fixed;
-            bottom: -200px; /* Inicialmente fuera de la pantalla */
-            right: -200px; /* Inicialmente fuera de la pantalla */
-            width: 150px; /* Ancho del peluche */
-            height: auto;
-            transition: bottom 2s ease-in-out, right 2s ease-in-out;
-        }
-
-        .peluche.visible {
-            bottom: 20px; /* Posición final */
-            right: 20px; /* Posición final */
-        }
-
-        /* Estilos para el botón de cerrar */
-        .close-btn {
-            position: fixed;
-            top: 10px;
-            right: 0px;
-            background-color: #131f24; /* Red color */
-            border: none;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            color: white;
-            font-size: 16px;
-            z-index: 1000; /* Ensure the button is above other elements */
-        }
-
-        /* Responsiveness */
         @media (max-width: 768px) {
             h1 {
-                font-size: 1.5em; /* Smaller font size for smaller screens */
+                font-size: 1.5em;
             }
 
             footer .ter-button,
             footer .camera-button {
-                font-size: 14px; /* Smaller font size for buttons */
-            }
-
-            .peluche {
-                width: 100px; /* Smaller peluche for smaller screens */
+                font-size: 14px;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="resolucion">
-        <div class="desktop"></div>
-        <div class="tablet"></div>
-        <div class="movil"></div>
-    </div>
-
     <div class="container">
         <main>
             <div class="content">
                 <h1>¡Hora de Aprender Lenguaje de Señas!</h1>
-                <img src="{{ url_for('video_feed') }}" alt="Video Feed">
+                <img src="{{ url_for('numeros') }}" alt="Video Feed">
             </div>
         </main>
-
     </div>
-
-    <!-- Imagen del peluche -->
-    <img src="./static/peluche.gif" alt="Peluche" class="peluche" id="peluche">
-    <!-- Botón de cerrar -->
-    <button class="close-btn" id="closeBtn">X</button>
-
-    <script>
-        // Esperar a que la página se cargue completamente
-        window.onload = function () {
-            // Añadir la clase visible al peluche para iniciar la animación
-            document.getElementById('peluche').classList.add('visible');
-        }
-
-        // Funcionalidad del botón de cerrar
-        document.getElementById('closeBtn').onclick = function () {
-            document.getElementById('peluche').classList.remove('visible');
-            document.getElementById('closeBtn').style.display = 'none';
-        }
-    </script>
 </body>
 
 </html>
