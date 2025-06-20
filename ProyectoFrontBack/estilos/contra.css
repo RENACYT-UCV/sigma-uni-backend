@@ -179,8 +179,7 @@ body {
     position: relative;
 }
 
-.text-field img {
-    /*ajusta la imagen del correo*/
+.text-field img { /*ajusta la imagen del correo*/
     position: absolute;
     right: 0.6rem;
     bottom: 0.6rem;

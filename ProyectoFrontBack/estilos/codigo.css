@@ -189,6 +189,7 @@ body {
     border-radius: 45px;
     width: 70px;
     height:70px ;
+    font-size: 70px;
     border: 2px solid var(--morado);
     box-sizing: border-box;
     margin-right: 15px;
@@ -202,11 +203,11 @@ body {
 }
 .text-field img { /*ajusta la imagen del correo*/
     position: absolute;
-    right: -0.125rem;
-    bottom: -0.25rem;
+    right: 0.6rem;
+    bottom: 0.6rem;
     width: 1.875rem;
     height: 1.875rem;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     transform-origin: center;
 }
 .text-field input:focus {
@@ -287,6 +288,7 @@ body {
     .text-field input {
         width: 60px;
         height: 60px;
+        font-size: 60px;
     }
 
     .container {
@@ -296,6 +298,9 @@ body {
         justify-content: center;
         align-items: center;
     }
-
+    
+    .text-field img {
+        bottom: -0.6rem;
+    }
 }
 
