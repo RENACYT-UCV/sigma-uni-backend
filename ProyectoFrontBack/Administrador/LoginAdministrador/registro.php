@@ -9,7 +9,7 @@ $query= "INSERT INTO Admi(nombrecompleto, correo, usuario, contrasena) VALUES('$
 $ejecutar = mysqli_query($conn, $query); 
 
 if($ejecutar){
-    header("Location: login.html");
+    header("Location: loginAdmin.html");
 }else{
     echo '
      Inténtalo nuevamente
