@@ -168,10 +168,10 @@ body {
 .text-field {
     position: relative;
 }
-.text-field img { /*ajusta la imagen del correo*/
+.text-field svg { /*ajusta la imagen del correo*/
     position: absolute;
-    right: -0.125rem;
-    bottom: -0.25rem;
+    right: 0.6rem;
+    bottom: 0.6rem;
     width: 1.875rem;
     height: 1.875rem;
     transform: translate(-50%,-50%);
