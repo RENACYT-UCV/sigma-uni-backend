@@ -193,7 +193,6 @@ body {
     border: 2px solid var(--morado);
     box-sizing: border-box;
     margin-right: 15px;
-    font-size: medium;
 }
 
 .text-field {
@@ -258,18 +257,6 @@ body {
     }
     .right-panel{
         width: 100%;
-    }
-}
-
-@media (max-width: 640px) {
-    .login-wrapper {
-        grid-template-columns: 1fr;
-        height: 100vh;
-    }
-
-    .info-side {
-        flex-direction: column-reverse;
-        padding: 3rem 3rem 3rem 2rem;
     }
 }
 
