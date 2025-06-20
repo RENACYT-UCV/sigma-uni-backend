@@ -6,6 +6,7 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import to_categorical
 from sklearn.preprocessing import LabelEncoder
 import joblib
+from sklearn.utils.class_weight import compute_class_weight
 
 # Leer los datos
 data = pd.read_csv("datos/datos_señas.csv", header=None)
@@ -31,6 +32,21 @@ model = Sequential([
 ])
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+# Calcular pesos
+class_weights = compute_class_weight(
+    class_weight='balanced',
+    classes=np.unique(y_encoded),
+    y=y_encoded
+)
+
+class_weight_dict = dict(enumerate(class_weights))
+
+y_pred = model.predict(X_test)
+y_pred_labels = np.argmax(y_pred, axis=1)
+y_true_labels = np.argmax(y_test, axis=1)
+
+from sklearn.metrics import classification_report
+print(classification_report(y_true_labels, y_pred_labels, target_names=label_encoder.classes_))
 
 # Entrenar
 model.fit(X_train, y_train, epochs=30, batch_size=16, validation_data=(X_test, y_test))
