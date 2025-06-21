@@ -4,16 +4,17 @@ import numpy as np
 from math import degrees, acos
 from PIL import ImageFont, ImageDraw, Image
 
+
 class MediaPipeUtils:
     """Utilidades compartidas para MediaPipe"""
-    
+
     def __init__(self):
         self.mp_drawing = mp.solutions.drawing_utils
         self.mp_hands = mp.solutions.hands
         self.mp_pose = mp.solutions.pose
-        self.mp_face_mesh = mp.solutions.face_mesh
+        # self.mp_face_mesh = mp.solutions.face_mesh
         self.mp_drawing_styles = mp.solutions.drawing_styles
-    
+
     def obtener_angulos(self, results, width, height):
         """Función para obtener los ángulos de las articulaciones de los dedos"""
         angulos_dedos = []
@@ -26,12 +27,12 @@ class MediaPipeUtils:
                 "thumb_outer": [(self.mp_hands.HandLandmark.THUMB_TIP, self.mp_hands.HandLandmark.THUMB_IP, self.mp_hands.HandLandmark.THUMB_MCP)],
                 "thumb_inner": [(self.mp_hands.HandLandmark.THUMB_TIP, self.mp_hands.HandLandmark.THUMB_MCP, self.mp_hands.HandLandmark.WRIST)]
             }
-            
+
             for key, value in coords.items():
                 x1, y1 = [int(hand_landmarks.landmark[value[0][0]].x * width), int(hand_landmarks.landmark[value[0][0]].y * height)]
                 x2, y2 = [int(hand_landmarks.landmark[value[0][1]].x * width), int(hand_landmarks.landmark[value[0][1]].y * height)]
                 x3, y3 = [int(hand_landmarks.landmark[value[0][2]].x * width), int(hand_landmarks.landmark[value[0][2]].y * height)]
-                
+
                 p1 = np.array([x1, y1])
                 p2 = np.array([x2, y2])
                 p3 = np.array([x3, y3])
@@ -46,7 +47,7 @@ class MediaPipeUtils:
                 angulos_dedos.append(angulo)
 
         return angulos_dedos
-    
+
     def draw_detection_box(self, frame, text, color, font):
         """Función compartida para dibujar el cuadro de detección"""
         height, width, _ = frame.shape
@@ -75,8 +76,8 @@ class MediaPipeUtils:
 
         frame = cv2.cvtColor(np.array(frame_pil), cv2.COLOR_RGB2BGR)
         return frame
-    
-    def draw_landmarks(self, frame, results, pose_results, face_mesh_results):
+
+    def draw_landmarks(self, frame, results, pose_results, face_mesh_results=None):
         """Dibujar todos los landmarks en el frame"""
         # Dibujar landmarks de manos
         if results.multi_hand_landmarks:
@@ -97,28 +98,29 @@ class MediaPipeUtils:
                 self.mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2))
 
         # Dibujar face mesh
-        if face_mesh_results.multi_face_landmarks:
-            for face_landmarks in face_mesh_results.multi_face_landmarks:
-                self.mp_drawing.draw_landmarks(frame, face_landmarks, self.mp_face_mesh.FACEMESH_TESSELATION, 
-                                             self.mp_drawing.DrawingSpec(color=(255, 0, 255), thickness=1, circle_radius=1))
-        
+        # if face_mesh_results.multi_face_landmarks:
+        #     for face_landmarks in face_mesh_results.multi_face_landmarks:
+        #         self.mp_drawing.draw_landmarks(frame, face_landmarks, self.mp_face_mesh.FACEMESH_TESSELATION,
+        #                                        self.mp_drawing.DrawingSpec(color=(255, 0, 255), thickness=1, circle_radius=1))
+
         return frame
+
 
 class BaseDetector:
     """Clase base para todos los detectores"""
-    
+
     def __init__(self):
         self.utils = MediaPipeUtils()
         self.cap = None
         self.lectura_actual = 0
         self.setup_camera()
-    
+
     def setup_camera(self):
         """Configurar la cámara"""
         self.cap = cv2.VideoCapture(0)
         self.cap.set(3, 1280)  # wCam
         self.cap.set(4, 720)   # hCam
-    
+
     def get_font(self, size=60):  # Aumentar tamaño por defecto de 50 a 60
         """Obtener fuente para el texto"""
         try:
@@ -128,11 +130,11 @@ class BaseDetector:
                 return ImageFont.truetype("./DINRoundPro.ttf", size)  # Ruta alternativa
             except IOError:
                 return ImageFont.load_default()
-    
+
     def process_finger_angles(self, angulosid):
         """Procesar ángulos para determinar estado de dedos"""
         dedos = []
-        
+
         if angulosid[5] > 125:
             dedos.append(1)
         else:
@@ -148,5 +150,5 @@ class BaseDetector:
                 dedos.append(1)
             else:
                 dedos.append(0)
-        
+
         return dedos
