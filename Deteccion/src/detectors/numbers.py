@@ -6,6 +6,8 @@ from detection_model.detection import Dectector
 class NumberDection:
     """Detector de números en lenguaje de señas"""
 
+    __tip_ids = [4, 8, 12, 16, 20]  # Índices de las puntas de los dedos
+
     __config_finger_numbers = {
         "Número - 0": [0, 0, 0, 0, 0, 0],
         "Número - 1": [1, 1, 0, 0, 0, 0],
@@ -54,13 +56,38 @@ class NumberDection:
             frame = cv2.flip(frame, 1)
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-            results = self.detector.hands.process(frame_rgb)
+            # results = self.detector.hands.process(frame_rgb)
 
-            if results.multi_hand_landmarks:
-                angles_id = self.detector.base.get_finger_angles(results, width, height)
-                fingers = self.detector.process_finger_angles(angles_id)
-                frame = self.detect_number(fingers, frame)
-                cv2.putText(frame, "Detectando...", (10, height - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+            frame, results = self.detector.hands.find_hands(frame)
+            landmarks_list = self.detector.hands.find_position(frame, results)
+
+            if len(landmarks_list) != 0:
+                fingers = []
+
+                if landmarks_list[self.__tip_ids[0]][1] < landmarks_list[self.__tip_ids[0] - 1][1]:  # Index finger tip is left of middle finger tip
+                    fingers.append(1)
+                else:
+                    fingers.append(0)
+
+                for id in range(1, 5):
+                    # cv2.circle(img, (lm_list[tip_ids[id]][1], lm_list[tip_ids[id]][2]), 15, (255, 0, 255), cv2.FILLED)
+                    if landmarks_list[self.__tip_ids[id]][2] < landmarks_list[self.__tip_ids[id] - 2][2]:  # Index finger tip is left of middle finger tip
+                        fingers.append(1)
+                    else:
+                        fingers.append(0)
+
+            # print(fingers)
+                total_fingers = fingers.count(1)
+                frame = self.detector.base.draw_detection_box(
+                    frame, text=f'Fingers: {total_fingers}', color=(0, 255, 0), font=30
+                )
+                cv2.putText(frame, str(total_fingers), (10, height - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+
+            # if results.multi_hand_landmarks:
+            #     angles_id = self.detector.base.get_finger_angles(results, width, height)
+            #     fingers = self.detector.process_finger_angles(angles_id)
+            #     frame = self.detect_number(fingers, frame)
+            #     cv2.putText(frame, "Detectando...", (10, height - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
             #     for hand_landmarks in results.multi_hand_landmarks:
             #         fingers = self.detector.get_finger_positions(hand_landmarks)
             # frame = self.detect_number(fingers, frame)
