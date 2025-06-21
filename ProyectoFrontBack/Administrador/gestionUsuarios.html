@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigma - Gestión de Usuarios</title>
+    <link rel="stylesheet" href="css/dashboardAdmin.css">
+    <link rel="stylesheet" href="css/gestionUsuarios.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-hands"></i>
+                <span class="logo-text">SIGMA</span>
+            </div>
+        </div>
+        
+        <div class="user-profile">
+            <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="user-info">
+                <span class="user-name">Administrador</span>
+                <span class="user-role">Super Admin</span>
+            </div>
+        </div>
+        
+        <div class="sidebar-content">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboardAdmin.html" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="gestionUsuarios.html" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span>Gestión Usuarios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestionAdministradores.html" class="nav-link">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Gestión Administradores</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-footer">
+            <a href="#logout" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    Usuarios ESTUDIANTES
+                </h1>
+            </div>
+        </header>
+        
+        <!-- Content Area -->
+        <div class="content-area">
+            <div class="user-welcome">
+                <p>Bienvenido a la sección de usuarios</p>
+            </div>
+            
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="nuevo">
+                    <i class="fas fa-plus"></i>
+                    NUEVO USUARIO
+                </button>
+                <button class="tab-btn" data-tab="lista">
+                    <i class="fas fa-list"></i>
+                    LISTA DE USUARIOS
+                </button>
+                <button class="tab-btn" data-tab="buscar">
+                    <i class="fas fa-search"></i>
+                    BUSCAR USUARIO
+                </button>
+            </div>
+            
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Nuevo Usuario Tab -->
+                <div class="tab-pane active" id="nuevo">
+                    <div class="form-container">
+                        <div class="form-header">
+                            <h2>
+                                <i class="fas fa-user"></i>
+                                Información personal
+                            </h2>
+                        </div>
+                        
+                        <form class="user-form" id="nuevoUsuarioForm">
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label for="dni">DNI/CÉDULA *</label>
+                                    <input type="text" id="dni" name="dni" required placeholder="Ingrese el DNI o cédula">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="nombres">Nombres *</label>
+                                    <input type="text" id="nombres" name="nombres" required placeholder="Ingrese los nombres">
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellidos">Apellidos *</label>
+                                    <input type="text" id="apellidos" name="apellidos" required placeholder="Ingrese los apellidos">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fechaNacimiento">Fecha de Nacimiento *</label>
+                                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="edad">Edad</label>
+                                    <input type="number" id="edad" name="edad" readonly placeholder="Se calcula automáticamente">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="telefono">Teléfono</label>
+                                    <input type="tel" id="telefono" name="telefono" placeholder="Ingrese el teléfono">
+                                </div>
+                                <div class="form-group">
+                                    <label for="correo">Correo electrónico *</label>
+                                    <input type="email" id="correo" name="correo" required placeholder="Ingrese el correo electrónico">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label for="direccion">Dirección</label>
+                                    <input type="text" id="direccion" name="direccion" placeholder="Ingrese la dirección">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="form-container">
+                        <div class="form-header">
+                            <h2>
+                                <i class="fas fa-key"></i>
+                                Datos de la cuenta
+                            </h2>
+                        </div>
+                        
+                        <form class="user-form" id="datosUsuarioForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="nombreUsuario">Nombre de usuario *</label>
+                                    <input type="text" id="nombreUsuario" name="nombreUsuario" required placeholder="Ingrese el nombre de usuario">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contrasena">Contraseña *</label>
+                                    <input type="password" id="contrasena" name="contrasena" required placeholder="Ingrese la contraseña">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="confirmarContrasena">Confirmar Contraseña *</label>
+                                    <input type="password" id="confirmarContrasena" name="confirmarContrasena" required placeholder="Confirme la contraseña">
+                                </div>
+                                <div class="form-group">
+                                    <label for="estado">Estado *</label>
+                                    <select id="estado" name="estado" required>
+                                        <option value="activo">Activo</option>
+                                        <option value="inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="limpiarForm">
+                                    <i class="fas fa-eraser"></i>
+                                    Limpiar
+                                </button>
+                                <button type="button" class="btn btn-primary" id="guardarUsuario">
+                                    <i class="fas fa-save"></i>
+                                    Guardar Usuario
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Lista de Usuarios Tab -->
+                <div class="tab-pane" id="lista">
+                    <div class="list-container">
+                        <div class="list-header">
+                            <h2>
+                                <i class="fas fa-users"></i>
+                                Lista de Usuarios Estudiantes
+                            </h2>
+                            <div class="list-actions">
+                                <button class="btn btn-primary" id="exportarBtn">
+                                    <i class="fas fa-download"></i>
+                                    Exportar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <table class="user-table" id="userTable">
+                                <thead>
+                                    <tr>
+                                        <th>DNI/Cédula</th>
+                                        <th>Nombre Completo</th>
+                                        <th>Edad</th>
+                                        <th>Correo</th>
+                                        <th>Usuario</th>
+                                        <th>Estado</th>
+                                        <th>Fecha Registro</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="userTableBody">
+                                    <!-- Los datos se cargarán dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="pagination" id="pagination">
+                            <!-- La paginación se generará dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Buscar Usuario Tab -->
+                <div class="tab-pane" id="buscar">
+                    <div class="search-container">
+                        <div class="search-header">
+                            <h2>
+                                <i class="fas fa-search"></i>
+                                Buscar Usuario
+                            </h2>
+                        </div>
+                        
+                        <div class="search-form">
+                            <div class="search-filters">
+                                <div class="filter-group">
+                                    <label for="searchDni">DNI/Cédula</label>
+                                    <input type="text" id="searchDni" placeholder="Buscar por DNI o cédula">
+                                </div>
+                                <div class="filter-group">
+                                    <label for="searchNombre">Nombre</label>
+                                    <input type="text" id="searchNombre" placeholder="Buscar por nombre">
+                                </div>
+                                <div class="filter-group">
+                                    <label for="searchCorreo">Correo</label>
+                                    <input type="email" id="searchCorreo" placeholder="Buscar por correo">
+                                </div>
+                                <div class="filter-group">
+                                    <label for="searchUsuario">Usuario</label>
+                                    <input type="text" id="searchUsuario" placeholder="Buscar por nombre de usuario">
+                                </div>
+                                <div class="filter-group">
+                                    <label for="searchEdadMin">Edad Mínima</label>
+                                    <input type="number" id="searchEdadMin" placeholder="Edad mínima" min="0" max="120">
+                                </div>
+                                <div class="filter-group">
+                                    <label for="searchEdadMax">Edad Máxima</label>
+                                    <input type="number" id="searchEdadMax" placeholder="Edad máxima" min="0" max="120">
+                                </div>
+                                <div class="filter-group">
+                                    <label for="searchEstado">Estado</label>
+                                    <select id="searchEstado">
+                                        <option value="">Todos los estados</option>
+                                        <option value="activo">Activo</option>
+                                        <option value="inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="search-actions">
+                                <button class="btn btn-primary" id="buscarBtn">
+                                    <i class="fas fa-search"></i>
+                                    Buscar
+                                </button>
+                                <button class="btn btn-secondary" id="limpiarBusquedaBtn">
+                                    <i class="fas fa-times"></i>
+                                    Limpiar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="search-results" id="searchResults">
+                            <!-- Los resultados de búsqueda se mostrarán aquí -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Modal para Editar Usuario -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-edit"></i>
+                    Editar Usuario
+                </h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user-form" id="editUserForm">
+                    <!-- El formulario de edición se generará dinámicamente -->
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <script src="js/dashboardAdmin.js"></script>
+    <script src="js/gestionUsuarios.js"></script>
+</body>
+</html>

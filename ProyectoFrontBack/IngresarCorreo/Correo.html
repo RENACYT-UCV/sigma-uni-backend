@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./iconos/logo sigma.png">
+    <link rel="stylesheet" href="../estilos/login.css" />
+    <link rel="stylesheet" href="../estilos/correo.css" />
+    <meta name="login">
+    <title>Correo Sigma</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="centro">
+                <h1>¿Quieres cambiar la Contraseña?</h1>
+                <p>
+                    Por favor ingrese su correo electronico. Se enviara un codigo de verificación para el cambio de contraseña.
+                </p>
+            </div>
+        </div>
+
+        <div class="right-panel">
+                <form action="correo.php" method="POST" class="my-form">
+                    <div class="movil"> 
+                        <h1>¿Quieres cambiar la Contraseña?</h1>
+                        <p>
+                            Por favor ingrese su correo electronico. Se enviara un codigo de verificación para el cambio de contraseña.
+                        </p>
+                    </div>
+                        <div class="text-field">
+                            <label for="correo">Correo:</label>
+                            <input type="email" id="email" name="email"
+                                placeholder="Ejmp: Juares16@gmail.com"
+                                required
+                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                            </svg>
+
+                        </div>
+                        <input type="submit" value="Enviar" class="my-form__button">
+                        
+                        
+                        <div class="my-form__actions">
+                            <div class="my-form__row">
+                                <span>¿No tienes una cuenta en Sigma? </span>
+                                <a href="#" title="Reset Password">
+                                    Registrate
+                                </a>
+                            </div>
+                            
+                        </div>
+                </form>
+        </div>
+    </div>
+</body>
+</html>

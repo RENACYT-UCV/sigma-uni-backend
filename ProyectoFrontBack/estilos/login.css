@@ -1,0 +1,245 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #f5f7fa;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+}
+
+.left-panel {
+    background: linear-gradient(135deg, #7352c0, #2f024b);
+    color: white;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0px 50px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.centro {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 25%;
+}
+
+.left-panel .centro h1 {
+    font-size: 3rem;
+    margin: 20px 0;
+    font-size: 3vw;
+}
+
+.left-panel .centro h1 span {
+    font-weight: bold;
+    color: #21163b;
+}
+
+.left-panel p {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-size: 1.5vw
+}
+
+.left-panel footer {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    text-align: center;
+    margin-top: auto;
+    height: 5%;
+}
+
+.left-panel img {
+    width: 80%;
+    margin: 20px auto;
+    height: 60%;
+}
+
+/* Right Panel */
+.right-panel {
+    padding: 170px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right-panel .log{
+    display: none;
+}
+
+.right-panel h2 {
+    margin-bottom: 30px;
+    font-size: 3rem;
+}
+
+.right-panel p {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.right-panel a {
+    color: #4b00ff;
+    text-decoration: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 15px;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.login-btn, .register-btn {
+    padding: 12px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.forgot-password {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 1400px) {
+        .right-panel {
+        padding: 40px 100px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left-panel,
+    .right-panel {
+        width: 100%;
+        padding: 40px;
+    }
+
+    .left-panel {
+        align-items: center;
+        text-align: center;
+        padding: 100px 100px 100px 100px;
+    }
+
+    .left-panel .centro h1 {
+        font-size: 3rem;
+    }
+
+    .left-panel p {
+        font-size: 1.2rem;
+    }
+
+    .left-panel img {
+        width: 60%;
+        margin: 20px auto;
+    }
+
+    .right-panel {
+        padding: 40px 130px;
+    }
+
+    .right-panel h2 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    form input,
+    .login-btn {
+        font-size: 1rem;
+    }
+    body{
+        height: 100%;
+    }
+}
+
+@media (max-width: 590px) {
+    .left-panel{
+        padding: 30px;
+    }
+
+    .right-panel{
+        padding: 40px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .right-panel h2{
+        display: none;
+    }
+
+    .right-panel{
+        padding: 40px 20px;
+    }
+
+    .container{
+        box-shadow: none;
+    }
+
+    body{
+        background: white;
+    }
+
+    .right-panel .log{
+        display:block;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .right-panel img {
+        width: 50%;
+        margin: 20px auto;
+        border-radius: 20px;
+    }
+
+    .right-panel .log span {
+        color:#7352c0
+    }
+
+    .right-panel .log h1 {
+        text-align: center;
+    }
+
+    .left-panel{
+        display: none;
+    }
+
+    .right-panel h2 {
+        font-size: 1.8rem;
+    }
+
+    .right-panel p {
+        font-size: 0.9rem;
+    }
+}
