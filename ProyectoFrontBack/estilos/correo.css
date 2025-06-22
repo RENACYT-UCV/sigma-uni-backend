@@ -11,24 +11,31 @@
     --AzulClaro: #006DFF; 
 
 }
-body{
-    height: 100vh;
-    width: 100vw;
-    display: grid;
-    place-items: center;
+
+body {
+    font-size: 1rem;
+    height: 100%;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 0;
 }
-.body{
+
+.body {
     background-color: rgba(19, 31, 36, 1);
     background-size: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.left-panel {
+    justify-content: center;
+    padding: 100px;
+}
+
+.centro{
+    margin-bottom: 300px;
 }
 
 .my-form__wrapper { /*contenedor */
@@ -96,20 +103,14 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
-    line-height: 3.125rem;
     outline: none;
     font-size: 1.125rem;
-    letter-spacing: .025em;
-    text-decoration: none;
+    letter-spacing: 0.025em;
     cursor: pointer;
-    font-weight: 800;
-    min-height: 3.125rem;
-    width: 100%;
     border-radius: 0.5rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,.15);
-    transition: all .3s ease;
-    -webkit-transition: all .3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
 }
 .my-form__button:hover{
     background-color: var(--morado) ;
@@ -167,10 +168,10 @@ body{
 .text-field {
     position: relative;
 }
-.text-field img { /*ajusta la imagen del correo*/
+.text-field svg { /*ajusta la imagen del correo*/
     position: absolute;
-    right: -0.125rem;
-    bottom: -0.25rem;
+    right: 0.6rem;
+    bottom: 0.6rem;
     width: 1.875rem;
     height: 1.875rem;
     transform: translate(-50%,-50%);
@@ -187,6 +188,11 @@ body{
     letter-spacing: .03rem; /*espacio del texto*/
     z-index: 10;
 }
+
+.movil {
+    display: none;
+}
+
 @media (max-width: 640px) {
     .login-wrapper {
         grid-template-columns: 1fr;
@@ -199,3 +205,38 @@ body{
     }
 }
 
+@media (max-width: 1027px){
+    .centro{
+        margin-bottom: 0px;
+    }
+
+    body{
+        min-height: max-content;
+    }
+}
+
+@media (max-width: 640px) {
+    .login-wrapper {
+        grid-template-columns: 1fr;
+        height: 100vh;
+    }
+
+    .info-side {
+        flex-direction: column-reverse;
+        padding: 3rem 3rem 3rem 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .movil {
+        display: block;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .movil h1 {
+        margin-bottom: 20px;
+    }
+}

@@ -1,6 +1,7 @@
 import cv2
 
 from .base import BaseDetector
+from .hand_detection import HandDetection
 
 
 class Dectector:
@@ -16,11 +17,7 @@ class Dectector:
         self.cap = None
         self.setup_camera()
 
-        self.hands = self.base.mp_hands.Hands(
-            static_image_mode=False,
-            max_num_hands=2,
-            min_detection_confidence=0.75
-        )
+        self.hands = HandDetection()
 
     def setup_camera(self):
         if not self.cap or not self.cap.isOpened():
@@ -30,24 +27,27 @@ class Dectector:
 
         # pass
 
-    def process_finger_angles(self, angulosid):
-        """Procesar ángulos para determinar estado de dedos"""
-        dedos = []
+    def process_finger_angles(self):
+        pass
 
-        if angulosid[5] > 125:
-            dedos.append(1)
-        else:
-            dedos.append(0)
+    # def process_finger_angles(self, angulosid):
+    #     """Procesar ángulos para determinar estado de dedos"""
+    #     dedos = []
 
-        if angulosid[4] > 150:
-            dedos.append(1)
-        else:
-            dedos.append(0)
+    #     if angulosid[5] > 125:
+    #         dedos.append(1)
+    #     else:
+    #         dedos.append(0)
 
-        for id in range(4):
-            if angulosid[id] > 90:
-                dedos.append(1)
-            else:
-                dedos.append(0)
+    #     if angulosid[4] > 150:
+    #         dedos.append(1)
+    #     else:
+    #         dedos.append(0)
 
-        return dedos
+    #     for id in range(4):
+    #         if angulosid[id] > 90:
+    #             dedos.append(1)
+    #         else:
+    #             dedos.append(0)
+
+    #     return dedos
