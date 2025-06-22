@@ -67,7 +67,17 @@
         <main>
             <div class="content">
                 <h1>¡Hora de Aprender Lenguaje de Señas!</h1>
-                <img src="{{ url_for('numeros') }}" alt="Video Feed">
+                <img src="{{ url_for('stream_numeros') }}" alt="Video Feed">
+                <h1 style="color: #0dce71;">Reconocimiento de Letras</h1>
+                <img src="{{ url_for('stream_letras') }}" alt="Video Letras" style="border: 5px solid #c3ead7; border-radius: 10px; max-width: 100%;">
+                <h2 style="color:white;">Selecciona qué detectar:</h2>
+<ul style="list-style: none; padding: 0;">
+    <li><a href="/stream/numeros" target="_blank">📌 Detección de Números</a></li>
+    <li><a href="/stream/letras" target="_blank">🔤 Detección de Letras</a></li>
+    <li><a href="/stream/alimentos" target="_blank">🍎 Detección de Alimentos</a></li>
+    <li><a href="/stream/frases" target="_blank">🗣️ Detección de Frases</a></li>
+</ul>
+
             </div>
         </main>
     </div>

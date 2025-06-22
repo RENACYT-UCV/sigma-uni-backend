@@ -7,6 +7,7 @@ from tensorflow.keras.utils import to_categorical
 from sklearn.preprocessing import LabelEncoder
 import joblib
 from sklearn.utils.class_weight import compute_class_weight
+from sklearn.metrics import classification_report
 
 # Leer los datos
 data = pd.read_csv("datos/datos_señas.csv", header=None)
@@ -44,8 +45,6 @@ class_weight_dict = dict(enumerate(class_weights))
 y_pred = model.predict(X_test)
 y_pred_labels = np.argmax(y_pred, axis=1)
 y_true_labels = np.argmax(y_test, axis=1)
-
-from sklearn.metrics import classification_report
 print(classification_report(y_true_labels, y_pred_labels, target_names=label_encoder.classes_))
 
 # Entrenar
