@@ -13,7 +13,7 @@ if ($ejecutar->num_rows > 0) {
     $_SESSION['contrasena'] = $contrasena;
     
     
-        header("location: ../Login_Admin/administrador/home.php");
+        header("location: ../dashboardAdmin.html");
     
 } else {
     // El usuario no existe

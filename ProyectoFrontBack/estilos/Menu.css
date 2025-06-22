@@ -1,3 +1,5 @@
+
+
 body {
   background-color: rgba(19, 31, 36, 1);
   color: #fff;
@@ -5,7 +7,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0;
 }
 
