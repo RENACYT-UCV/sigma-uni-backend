@@ -1,0 +1,25 @@
+# 📁 Ignorar credenciales sensibles
+ProyectoFrontBack/DataBase_Fire/*.json
+
+# 🧪 Archivos de configuración y entornos locales
+.env
+*.env
+
+# 🧠 Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# 🧠 Archivos de configuración del editor
+.vscode/
+.idea/
+
+# 🗂️ Archivos de dependencias (si usas Node.js)
+node_modules/
+
+# 🏗️ Archivos de compilación y temporales
+dist/
+build/
+*.log
+
+# 🔄 Archivos de control de versiones conflictivos
+*.orig

@@ -1,0 +1,10 @@
+# pack-refs with: peeled fully-peeled sorted 
+0aa92fd5b2831a68bf19414f1c1357e2634d2d12 refs/heads/backend
+d58c4fa579056c0e790485ee3c95317bd08cbbd7 refs/heads/backend-brayan
+05719080ae8e122e510c9cd58f6b27eaf1520b8c refs/heads/camara-deteccion
+abc0e847c369242408355f8ecc04613a0141ea11 refs/heads/frontend
+3a668c15c594ccbc11a9a11ce56e6123d4a46edc refs/heads/main
+c83521cb985a7ea1887ea8f32ce581c4c9d1023b refs/heads/rama-deteccion
+abdf0ee16aa7adf774372ef7d7de4eacfa7e3686 refs/pull/1/head
+bef8034ebd30a9b3248f5e6eeb03687470992644 refs/pull/2/head
+abc0e847c369242408355f8ecc04613a0141ea11 refs/pull/3/head
