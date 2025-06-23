@@ -27,6 +27,15 @@
         </div>
     </div>
 
+    <div id="dialog-overlay" class="overlay">
+        <div class="dialog-box">
+            <h2 class="dialog-title">Lenguaje de Señas: Alimentos</h2>
+            <p class="dialog-text"> En esta lección aprenderás cómo representar diferentes alimentos usando el lenguaje de señas. Verás imágenes de cómo se señalan frutas, verduras, y otros productos básicos. Solo selecciona un alimento y descubre su seña correspondiente.</p>
+            <img src="../iconos/bloques-numericos.png" alt="numero">
+            <button class="dialog-button" onclick="closeDialog()">Iniciar lección</button>
+        </div>
+    </div>
+
     <div class="footer">
         <div class="footer-bar">
             <a href="../Menu.html">
@@ -47,6 +56,11 @@
             var imagen = document.getElementById('imagenDinamica');
             imagen.src = 'Alimento/mano-' + alimento + '.png';
         }
+        function closeDialog() {
+            document.getElementById('dialog-overlay').style.display = 'none';
+        }
+
+        document.getElementById('dialog-overlay').style.display = 'flex';
     </script>
 </body>
 </html>
