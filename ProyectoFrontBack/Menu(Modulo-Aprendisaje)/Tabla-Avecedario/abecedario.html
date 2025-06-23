@@ -1,268 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Abecedario</title>
     <link rel="stylesheet" href="abecedario.css">
     <style>
-        body {
-            background-color: rgba(19, 31, 36, 1);
-            color: #fff;
-            font-family: sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            position: relative;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .title {
-            font-size: 3.3em;
-            margin-bottom: 10px;
-            text-align: center;
-            margin-top: 0.05px;
-            color:  #8a2be2;
-        }
-
-        input {
-            padding: 10px;
-            border: none;
-            border-radius: 50px;
-            background-color: #fff;
-            color: #000;
-        }
-
-        .image-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .image-container img {
-            width: 400px;
-            height: 400px;
-            border-radius: 100px;
-        }
-
-        .image-text {
-            color: #fff;
-            font-size: 1.5em;
-            text-align: center;
-            margin-top: 10px;
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .footer::before,
-        .footer::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid #fff;
-            margin: 0 10px;
-        }
-
-        .menu {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 10px;
-            justify-items: center;
-            align-items: center;
-        }
-
-        .menu-item {
-            background-color: rgba(19, 31, 36, 1);
-            padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-            width: 90px;
-            height: 55px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 6px rgb(255, 255, 255);
-            transition: transform 0.1s;
-        }
-
-        .menu-item:hover {
-            transform: scale(1.35);
-        }
-
-        .menu-item h3 {
-            font-size: 4em;
-            margin: 0;
-            color: #ffffff;
-        }
-
-        .footer {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background-color: #111;
-            width: 100%;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-        }
-
-        .footer-item {
-            background-color: #111;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            align-items: center;
-        }
-
-        .footer-item img {
-            width: 30px;
-            height: 30px;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-
-        .footer-item span {
-            color: #fff;
-            font-size: 16px;
-        }
-
-        .footer-item img {
-            width: 50px;
-            height: 50px;
-        }
-
-        .footer-item span {
-            margin-left: 100px;
-            color: #fff;
-            font-size: 16px;
-        }
-
-        .logo {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-
-        .logo img {
-            width: 400px;
-            height: auto;
-        }
-
-        .submit-button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 50px;
-            background-color: #8a2be2;
-            color: #fff;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .submit-button:hover {
-            background-color: #5e1a9c;
-        }
-
-        @media (max-width: 768px) {
-            .title {
-                font-size: 2.5em;
-            }
-
-            .image-container img {
-                width: 250px;
-                height: 250px;
-            }
-
-            .menu {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .menu-item {
-                width: 70px;
-                height: 45px;
-            }
-
-            .menu-item h3 {
-                font-size: 2.5em;
-            }
-
-            .logo img {
-                width: 200px;
-            }
-
-            .footer-item img {
-                width: 30px;
-                height: 30px;
-            }
-
-            .footer-item span {
-                font-size: 12px;
-                margin-left: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .title {
-                font-size: 2em;
-            }
-
-            .image-container img {
-                width: 150px;
-                height: 150px;
-            }
-
-            .menu {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .menu-item {
-                width: 60px;
-                height: 40px;
-            }
-
-            .menu-item h3 {
-                font-size: 2em;
-            }
-
-            .logo img {
-                width: 150px;
-            }
-
-            .footer-item img {
-                width: 20px;
-                height: 20px;
-            }
-
-            .footer-item span {
-                font-size: 10px;
-                margin-left: 5px;
-            }
-        }
     </style>
 </head>
 
 <body>
-    
     <div class="container">
         <h1 class="title">¡APRENDAMOS EL ABECEDARIO EN SEÑAS!</h1>
         <input type="text" id="letraInput" placeholder="Escribe una palabra">
         <div class="image-container" id="imageContainer">
-            <img src="logo sigma.png" class="imagen-letra" id="logoImagen">
+            <img src="../iconos/logo sigma.PNG" class="imagen-letra" id="logoImagen">
         </div>
         <div class="image-text">ABECEDARIO</div>
         <div class="menu">
@@ -348,26 +100,21 @@
                 <h3>Z</h3>
             </button>
         </div>
-      
-        <div class="footer">
-            <div class="footer-bar">
-                <a href="../../../flask_opencv/flask_opencv/templates/indext2.html">
-                    <button class="footer-item">
-                        <img src="../iconos/homa.png" alt="Home">
-                    </button>
-                </a>
-                <a href="../Menu.html">
-                    <button class="footer-item">
-                        <img src="../iconos/menu.png" alt="Menu">
-                    </button>
-                </a>
+    </div>
 
-                <a href="http://127.0.0.1:5000/letras">
-                    <button class="footer-item">
-                        <img src="../iconos/camara.png" alt="Camera">
-                    </button>
-                </a>
-            </div>
+    <div class="footer">
+        <div class="footer-bar">
+            <a href="../Menu.html">
+                <button class="footer-item">
+                    <img src="../iconos/homa.png" alt="Home">
+                </button>
+            </a>
+
+            <a href="http://127.0.0.1:5000/letras">
+                <button class="footer-item">
+                    <img src="../iconos/camara.png" alt="Camera">
+                </button>
+            </a>
         </div>
     </div>
 

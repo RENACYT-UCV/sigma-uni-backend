@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigma - Panel Administrativo</title>
+    <link rel="stylesheet" href="css/dashboardAdmin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-hands"></i>
+                <span class="logo-text">SIGMA</span>
+            </div>
+        </div>
+        
+        <div class="user-profile">
+            <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="user-info">
+                <span class="user-name">Administrador</span>
+                <span class="user-role">Super Admin</span>
+            </div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active">
+                <a href="#dashboard" class="nav-link" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="gestionUsuarios.html" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>Gestión Usuarios</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="gestionAdministradores.html" class="nav-link">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Gestión Administradores</span>
+                </a>
+            </li>
+            </ul> 
+        
+        <div class="sidebar-footer">
+            <a href="#logout" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Dashboard</h1>
+            </div>
+        </header>
+        
+        <!-- Dashboard Content -->
+        <div class="content-area" id="dashboardContent">
+            <!-- Stats Card -->
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-icon users">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" data-target="1247">0</h3>
+                        <p class="stat-label">Usuarios Totales</p>
+                        <span class="stat-change positive">+12% este mes</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Gráfico de Puntaje de Lenguaje de Señas</h3>
+                        <div class="chart-controls">
+                            <select class="chart-filter">
+                                <option value="week">Esta Semana</option>
+                                <option value="month">Este Mes</option>
+                                <option value="year">Este Año</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="scoresChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Gráfico de Usuarios</h3>
+                        <div class="chart-controls">
+                            <select class="chart-filter">
+                                <option value="daily">Diario</option>
+                                <option value="weekly">Semanal</option>
+                                <option value="monthly">Mensual</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="usersChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Other Sections (Hidden by default) -->
+        <div class="content-area hidden" id="leccionesContent">
+            <div class="section-placeholder">
+                <i class="fas fa-book"></i>
+                <h2>Gestión de Lecciones</h2>
+                <p>Esta sección estará disponible próximamente</p>
+            </div>
+        </div>
+        
+        <div class="content-area hidden" id="progresoContent">
+            <div class="section-placeholder">
+                <i class="fas fa-chart-line"></i>
+                <h2>Seguimiento de Progreso</h2>
+                <p>Esta sección estará disponible próximamente</p>
+            </div>
+        </div>
+        
+        <div class="content-area hidden" id="reportesContent">
+            <div class="section-placeholder">
+                <i class="fas fa-file-alt"></i>
+                <h2>Reportes y Análisis</h2>
+                <p>Esta sección estará disponible próximamente</p>
+            </div>
+        </div>
+        
+        <div class="content-area hidden" id="configuracionContent">
+            <div class="section-placeholder">
+                <i class="fas fa-cog"></i>
+                <h2>Configuración del Sistema</h2>
+                <p>Esta sección estará disponible próximamente</p>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <script src="js/dashboardAdmin.js"></script>
+</body>
+</html>

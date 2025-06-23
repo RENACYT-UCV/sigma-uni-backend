@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./iconos/logo sigma.png">
+    <link rel="stylesheet" href="../estilos/login.css" />
+    <link rel="stylesheet" href="../estilos/codigo.css" />
+    <meta name="login">
+    <title>Codigo de Verificacion</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="centro">
+                <h1>¿Quieres cambiar la Contraseña?</h1>
+                <p>
+                    Ingrese el codigo enviado que se envio a su correo electronico.
+                </p>
+            </div>
+        </div>
+
+        <div class="right-panel">
+                    <form action="codigo.php" method="POST" class="my-form">
+                        <div class="movil"> 
+                            <h1>¿Quieres cambiar la Contraseña?</h1>
+                            <p>
+                                Ingrese el codigo enviado
+                            </p>
+                        </div>
+
+                        <h2>Codigo de 4 digitos</h2>
+
+                        <div class="text-field">
+                            <input
+                                type="text"
+                                id="numero1"
+                                name="numero1"
+                                maxlength="1"
+                                required
+                            >
+                             <input
+                                type="text"
+                                id="numero2"
+                                name="numero2"
+                                maxlength="1"
+                                required
+                            >
+                             <input
+                             type="text"
+                             id="numero3"
+                             name="numero3"
+                            maxlength="1"
+                             required
+                            >
+                              <input
+                             type="text"
+                             id="numero4"
+                             name="numero4"
+                            maxlength="1"
+                             required
+                             >
+                            
+                        </div>
+                        
+                        <input type="submit" class="my-form__button" value="Enviar">
+                        <div class="my-form__actions">
+                            <div class="my-form__row">
+                                <span>¿Recibiste el código? </span><br><br>
+                                <a href="../IngresarCorreo/Correo.html" title="Reset Password">
+                                    Verificar
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </form>
+        </div>
+    </div>
+    <script>
+document.querySelector("form").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const codigo = 
+    document.getElementById("numero1").value +
+    document.getElementById("numero2").value +
+    document.getElementById("numero3").value +
+    document.getElementById("numero4").value;
+
+  const email = localStorage.getItem("correo");
+
+  const res = await fetch("http://localhost:5000/verificar-codigo", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, codigo })
+  });
+
+  const data = await res.json();
+  alert(data.message);
+
+  if (data.status === "success") {
+    // Guardamos nombre de usuario para cambio de contraseña
+    localStorage.setItem("usuarioCambiar", data.usuario);
+    window.location.href = "../IngresarCorreo/NuevaContra.html";
+  }
+});
+</script>
+
+</body>
+</html>

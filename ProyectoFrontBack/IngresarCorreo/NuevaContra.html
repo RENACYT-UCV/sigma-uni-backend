@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../iconos/logo sigma.png">
+    <link rel="stylesheet" href="../estilos/login.css" />
+    <title>Restablecer Contraseña</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="centro">
+                <h1>Cambiar contraseña</h1>
+                <p>Ingresa tu nueva contraseña para tu cuenta Sigma.</p>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <form id="form-nueva-contraseña" class="my-form">
+                <div class="movil">
+                    <h1>Nueva Contraseña</h1>
+                </div>
+
+                <div class="text-field">
+                    <label for="nueva">Nueva contraseña:</label>
+                    <input type="password" id="nueva" required>
+                </div>
+
+                <div class="text-field">
+                    <label for="confirmar">Confirmar contraseña:</label>
+                    <input type="password" id="confirmar" required>
+                </div>
+
+                <input type="submit" class="my-form__button" value="Cambiar Contraseña">
+
+                <div class="my-form__actions">
+                    <p><a href="../Menu(Modulo-Aprendisaje)/Login.html">Volver al login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("form-nueva-contraseña").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const nueva = document.getElementById("nueva").value;
+            const confirmar = document.getElementById("confirmar").value;
+            const usuario = localStorage.getItem("usuarioCambiar");
+
+            if (!usuario) {
+                alert("Error: Usuario no encontrado. Vuelve a iniciar el proceso.");
+                return;
+            }
+
+            if (nueva !== confirmar) {
+                alert("Las contraseñas no coinciden.");
+                return;
+            }
+
+            const res = await fetch("http://localhost:5000/cambiar-contrasena", {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({ usuario, nuevaContrasena: nueva })  // ✔️
+             });
+
+
+            const data = await res.json();
+            alert(data.message);
+
+            if (data.status === "success") {
+                localStorage.removeItem("usuarioCambiar");
+                window.location.href = "../Menu(Modulo-Aprendisaje)/Login.html";
+            }
+        });
+    </script>
+</body>
+</html>

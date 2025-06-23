@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./iconos/logo sigma.png">
+    <link rel="stylesheet" href="../estilos/login.css" />
+    <link rel="stylesheet" href="../estilos/contra.css" />
+    <meta name="login">
+    <title>Login Sigma</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="centro">
+                <h1>Cambiar Contraseña</h1>
+                <p>
+                    Para cambiar tu contraseña, ingresa la contraseña actual y la nueva. Asegúrate de que la nueva contraseña sea diferente a la anterior.
+                </p>
+                <div class="regresar">
+                    <a href="../Menu(Modulo-Aprendisaje)/Login.html">
+                        Regresar →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+                <form action="CambioContr.php" method="POST" class="my-form">
+                    <div class="movil"> 
+                        <h1>Cambiar Contraseña</h1>
+                        <p>
+                            Para cambiar tu contraseña, ingresa la contraseña actual y la nueva. Asegúrate de que la nueva contraseña sea diferente a la anterior.
+                        </p>
+                        <div class="regresar-mobile">
+                            <a href="../Menu(Modulo-Aprendisaje)/Login.html">
+                               Regresar  →
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="text-field">
+                        <label for="contrseña_actual">Contraseña actual: </label>
+                        <input
+                            type="password"
+                            id="contrasena_actual"
+                            name="contrasena_actual"
+                            placeholder="Actual"
+                            required
+                        >
+                        <img src="../Menu(Modulo-Aprendisaje)/iconos/ver.png" alt="">
+                    </div>
+                    <div class="text-field">
+                        <label for="contrseña_nueva">Nueva contraseña</label>
+                        <input
+                            type="password"
+                            id="contraseña_nueva"
+                            name="contraseña_nueva"
+                            placeholder="Nueva"
+                            required
+                        >
+                        <img src="../Menu(Modulo-Aprendisaje)/iconos/ver.png" alt="">
+                    </div>
+                    
+                    <input type="submit" class="my-form__button" value="Cambiar contraseña">
+                    
+                </form>
+                <div id="confirmationMessage" class="hidden">
+                    ¡Contraseña actualizada con éxito!
+                </div>
+        </div>
+    </div>
+    <script src="mensaje.js"></script>
+</body>
+</html>

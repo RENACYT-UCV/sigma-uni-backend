@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="icon" type="image/png" href="./iconos/logo sigma.png"/>
+    <link rel="stylesheet" href="../estilos/login.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Registro Sigma</title>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="right-panel">
+            <div class="log">
+                <h1>¡Se parte de <span>Sigma</span>😊!</h1>
+            <img src="iconos/logo sigma.png" alt="Logo Sigma" class="logo" />
+            </div>  
+            <h2>Cree una cuenta</h2>
+            
+            <form id="registro-form">
+                  <input type="text" placeholder="Nombre Completo" id="nombre" name="nombre" required>
+                 <input type="email" placeholder="Correo electrónico" id="correo" name="correo" required>
+                  <input type="text" placeholder="Usuario" id="usuario" name="usuario" required>
+                  <input type="password" placeholder="Contrasena" id="contrasena" name="contrasena" required>
+                  <button type="submit" class="register-btn">Crear Cuenta</button>
+               
+
+                <p>
+                    ¿Ya tiene una cuenta? <a href="./Login.html">Iniciar Sesión</a>
+                </p>
+
+                <p>
+                    ¿Eres Administrador? <a href="./Login-Admin.html">Entrar</a>
+                </p>
+
+            </form> 
+        </div>
+
+        <div class="left-panel">
+            <div class="centro">
+                <h1>¡Se parte de <span>Sigma</span>😊!</h1>
+                <p>Registrate para aprender el gran lenguaje de señas.</p>
+            </div>
+            <img src="./iconos/Fondo.png" alt="img-bg">
+            <footer>© 2025 Sigma. Todos los derechos reservados.    </footer>
+        </div>
+    </div>
+
+<script>
+document.getElementById("registro-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const data = {
+        nombre: document.getElementById("nombre").value,
+        correo: document.getElementById("correo").value,
+        usuario: document.getElementById("usuario").value,
+        contrasena: document.getElementById("contrasena").value
+    };
+
+    try {
+        const res = await fetch("http://localhost:5000/registro", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        const response = await res.json();
+        alert(response.message);  // Muestra éxito o error
+
+        if (res.ok && response.status === "success") {
+            window.location.href = "./Login.html";
+        }
+
+    } catch (error) {
+        alert("❌ Error de conexión con el servidor.");
+        console.error(error);
+    }
+});
+
+</script>
+
+
+</body>
+</html>
