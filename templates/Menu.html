@@ -51,11 +51,9 @@
                     <img src="{{ url_for('static', filename='img/homa.png') }}" alt="Home">
                 </button>
             </a>
-            <a href="{{ url_for('login_page') }}">
-                <button class="footer-item">
-                    <img src="{{ url_for('static', filename='img/salida.png') }}" alt="cerrar sesión" id="logoutButton">
-                </button>
-            </a>
+            <button class="footer-item" id="logoutButton">
+                <img src="{{ url_for('static', filename='img/salida.png') }}" alt="cerrar sesión">
+            </button>
             <a href="http://127.0.0.1:5000/">
                 <button class="footer-item">
                     <img src="{{ url_for('static', filename='img/camara.png') }}" alt="Camera">
@@ -64,22 +62,22 @@
         </div>
     </div>
     <script>
-    // (Puedes añadir un botón de logout en Menu.html o en otras páginas)
-    // Ejemplo de cómo sería el código JS para cerrar sesión:
-    
-    document.getElementById('logoutButton').addEventListener('click', async function() {
+    // Manejo de logout
+    document.getElementById('logoutButton').addEventListener('click', async function(event) {
+        event.preventDefault(); // Prevenir cualquier acción por defecto
+        
         try {
             const response = await fetch('/api/logout', {
                 method: 'POST'
             });
             const data = await response.json();
             if (response.ok) {
-                console.log(data.message);
+                console.log('Logout exitoso:', data.message);
                 localStorage.removeItem('user_role'); // Limpia el rol si lo guardaste
                 window.location.href = '/login'; // Redirige al login
             } else {
                 console.error('Error al cerrar sesión:', data.error);
-                alert(data.error);
+                alert('Error al cerrar sesión: ' + data.error);
             }
         } catch (error) {
             console.error('Error de red al cerrar sesión:', error);
