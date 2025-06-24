@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{{ url_for('static', filename='img/logo sigma.PNG') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/codigo.css') }}" />
+    <title>Codigo de Verificacion</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="centro">
+                <h1>¿Quieres cambiar la Contraseña?</h1>
+                <p>
+                    Ingrese el código enviado a su correo electrónico.
+                </p>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <form id="verifyCodeForm" class="my-form"> <!-- Agregado ID al formulario -->
+                <div class="movil"> 
+                    <h1>¿Quieres cambiar la Contraseña?</h1>
+                    <p>
+                        Ingrese el código enviado
+                    </p>
+                </div>
+
+                <h2>Código de 6 dígitos</h2> <!-- Cambiado a 6 dígitos para coincidir con el backend -->
+
+                <div class="text-field">
+                    <input type="text" id="code1" name="code1" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" id="code2" name="code2" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" id="code3" name="code3" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" id="code4" name="code4" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" id="code5" name="code5" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" id="code6" name="code6" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                </div>
+                
+                <button type="submit" class="my-form__button">Verificar</button> <!-- Cambiado a button type="submit" -->
+                <div id="messageDisplay" class="message-container" style="display: none;"></div> <!-- Para mensajes -->
+
+                <div class="my-form__actions">
+                    <div class="my-form__row">
+                        <span>¿No recibiste el código? </span><br><br>
+                        <a href="{{ url_for('forgot_password_page') }}" title="Reenviar Código">
+                            Reenviar Código
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const verifyCodeForm = document.getElementById('verifyCodeForm');
+        const codeInputs = document.querySelectorAll('.text-field input[type="text"]');
+        const messageDisplay = document.getElementById('messageDisplay');
+        const resetEmail = sessionStorage.getItem('reset_email'); // Obtener el correo de sessionStorage
+
+        // Redirigir si no hay correo en sessionStorage (navegación directa)
+        if (!resetEmail) {
+            alert('Por favor, ingrese su correo electrónico primero.'); // Usar modal personalizado
+            window.location.href = '/forgot_password';
+        }
+
+        function showMessage(message, type) {
+            messageDisplay.textContent = message;
+            messageDisplay.className = 'message-container';
+            messageDisplay.classList.add('message-' + type);
+            messageDisplay.style.display = 'block';
+            // No ocultar automáticamente para que el usuario lea el mensaje
+        }
+
+        // Manejar el movimiento entre inputs automáticamente
+        codeInputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === input.maxLength && index < codeInputs.length - 1) {
+                    codeInputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (event) => {
+                // Si la tecla es "Backspace" y el campo actual está vacío, mover el foco al anterior
+                if (event.key === 'Backspace' && input.value.length === 0 && index > 0) {
+                    codeInputs[index - 1].focus();
+                }
+            });
+        });
+
+
+        verifyCodeForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            // Unir los valores de los inputs para formar el código completo
+            const code = Array.from(codeInputs).map(input => input.value).join('');
+
+            if (code.length !== 6) { // Asegurar que sean 6 dígitos
+                showMessage('Por favor, ingrese el código completo de 6 dígitos.', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/verify_reset_code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: resetEmail, code: code })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage(data.message + " Redirigiendo para cambiar la contraseña...", 'success');
+                    // Guardar el reset_token_id en sessionStorage para el siguiente paso
+                    sessionStorage.setItem('reset_token_id', data.reset_token_id);
+                    // Limpiar el email de sessionStorage para evitar su uso indebido
+                    sessionStorage.removeItem('reset_email');
+                    
+                    setTimeout(() => {
+                        window.location.href = '/change_password_form'; // Redirigir a la página de cambio de contraseña
+                    }, 2000);
+                } else {
+                    showMessage(data.error || 'Ocurrió un error al verificar el código.', 'error');
+                }
+            } catch (error) {
+                console.error('Error de red o del servidor:', error);
+                showMessage('Error de conexión. Por favor, intente de nuevo.', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

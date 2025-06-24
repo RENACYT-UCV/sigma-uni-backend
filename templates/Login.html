@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{{ url_for('static', filename='iconos/logo sigma.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+    <meta name="login">
+    <title>Login Sigma</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="centro">
+                <h1>¡Bienvenido <span>Sigma</span>!</h1>
+                <p>
+                    Aprende y enseña lenguaje de señas fácilmente. Automatiza tu aprendizaje y ahorra tiempo con nuestra plataforma.
+                </p>
+            </div>
+            <img src="{{ url_for('static', filename='img/Fondo.png') }}" alt="Imagen de fondo">
+            <footer>© 2025 Sigma. Todos los derechos reservados.</footer>
+        </div>
+
+        <div class="right-panel">
+            <div class="log">
+                <h1>¡Bienvenido a <span>Sigma</span>!</h1>
+                <img src="{{ url_for('static', filename='img/logo sigma.PNG') }}" alt="Logo Sigma" class="logo" />
+            </div>
+            <h2>Iniciar sesión</h2>
+            <form id="loginForm"> <!-- Agregado ID para acceder con JS -->
+                <input type="text" placeholder="Usuario o Correo" name="username_or_email" required /> <!-- Agregado name -->
+                <input type="password" placeholder="Contraseña" name="password" required /> <!-- Agregado name -->
+                <p class="forgot-password">
+                    ¿Olvidaste tu contraseña? <a href="{{ url_for('forgot_password_page') }}">Haz clic aquí</a>
+                </p>
+                <button type="submit" class="login-btn">Iniciar sesión</button>
+                <p>
+                    ¿No tienes una cuenta? <a href="{{ url_for('register_page') }}">Crea una nueva cuenta</a>. <br><br>Eres administrador entrar a <a href="/admin/login">Administrador</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+<script>
+    // Obtener el formulario por su ID
+    const loginForm = document.getElementById('loginForm');
+
+    // Escuchar el evento de envío del formulario
+    loginForm.addEventListener('submit', async function (event) {
+        event.preventDefault(); // Previene el envío tradicional del formulario que recargaría la página
+
+        // Obtener los valores de los campos de entrada
+        const usernameOrEmail = loginForm.querySelector('input[name="username_or_email"]').value;
+        const password = loginForm.querySelector('input[name="password"]').value;
+
+        try {
+            // Realizar la solicitud POST a la API de login
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Indicar que estamos enviando JSON
+                },
+                // Convertir los datos a JSON string
+                body: JSON.stringify({
+                    username_or_email: usernameOrEmail,
+                    password: password
+                })
+            });
+
+            // Convertir la respuesta a JSON (para leer el mensaje y el rol, no el token)
+            const data = await response.json();
+
+            // Verificar si la respuesta fue exitosa (código de estado 200 OK)
+            if (response.ok) {
+                console.log('Inicio de sesión exitoso:', data.message);
+                // El token ya ha sido establecido en una cookie HttpOnly por el servidor.
+                // Aquí solo necesitas guardar el rol si lo necesitas en el frontend para lógica de UI.
+                localStorage.setItem('user_role', data.role); // Puedes mantener esto para lógica de frontend si lo necesitas
+
+                // Redirigir al usuario al menú principal
+                window.location.href = '/menu';
+            } else {
+                // Si la respuesta no fue exitosa, mostrar el mensaje de error de la API
+                console.error('Error en el inicio de sesión:', data.error);
+                alert(data.error); // En producción, usa una modal personalizada.
+            }
+        } catch (error) {
+            // Manejar errores de red o del servidor
+            console.error('Error de conexión o del servidor:', error);
+            alert('Hubo un problema al conectar con el servidor. Inténtalo de nuevo.'); // En producción, usa una modal personalizada.
+        }
+    });
+</script>
+</body>
+</html>

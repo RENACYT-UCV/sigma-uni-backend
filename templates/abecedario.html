@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Abecedario</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/abecedario.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">¡APRENDAMOS EL ABECEDARIO EN SEÑAS!</h1>
+        <input type="text" id="letraInput" placeholder="Escribe una palabra">
+        <div class="image-container" id="imageContainer">
+            <img src="{{ url_for('static', filename='img/logo sigma.PNG') }}" class="imagen-letra" id="logoImagen">
+        </div>
+        <div class="image-text">ABECEDARIO</div>
+        <div class="menu">
+            <button class="menu-item" onclick="cambiarImagen('A')">
+                <h3>A</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('B')">
+                <h3>B</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('C')">
+                <h3>C</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('D')">
+                <h3>D</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('E')">
+                <h3>E</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('F')">
+                <h3>F</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('G')">
+                <h3>G</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('H')">
+                <h3>H</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('I')">
+                <h3>I</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('J')">
+                <h3>J</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('K')">
+                <h3>K</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('L')">
+                <h3>L</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('M')">
+                <h3>M</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('N')">
+                <h3>N</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('Ñ')">
+                <h3>Ñ</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('O')">
+                <h3>O</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('P')">
+                <h3>P</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('Q')">
+                <h3>Q</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('R')">
+                <h3>R</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('S')">
+                <h3>S</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('T')">
+                <h3>T</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('U')">
+                <h3>U</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('V')">
+                <h3>V</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('W')">
+                <h3>W</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('X')">
+                <h3>X</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('Y')">
+                <h3>Y</h3>
+            </button>
+            <button class="menu-item" onclick="cambiarImagen('Z')">
+                <h3>Z</h3>
+            </button>
+        </div>
+    </div>
+
+    <!-- Botón de Finalizar Lección - Asegúrate de que tenga el ID 'finishLessonBtn' -->
+    <button id="finishLessonBtn" class="finish-btn">Finalizar Lección</button>
+
+    <div id="dialog-overlay" class="overlay">
+        <div class="dialog-box">
+            <h2 class="dialog-title">Lenguaje de Señas: Abecedario</h2>
+            <p class="dialog-text">Aprende a representar cada letra del abecedario con tus manos. Al presionar una letra o escribir una palabra, verás su representación en señas, ideal para deletrear nombres o palabras completas en lenguaje de señas.</p>
+            <img src="{{ url_for('static', filename='img/alfabeto.png') }}" alt="alfabeto">
+            <button class="dialog-button" onclick="closeDialog()">Iniciar lección</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-bar">
+            <a href="{{ url_for('menu_page') }}">
+                <button class="footer-item">
+                    <img src="{{ url_for('static', filename='img/homa.png') }}" alt="Home">
+                </button>
+            </a>
+
+            <a href="http://127.0.0.1:5000/letras"> <!-- Si esta URL es para la cámara, asegúrate que sea correcta -->
+                <button class="footer-item">
+                    <img src="{{ url_for('static', filename='img/camara.png') }}" alt="Camera">
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // *** Variable pasada desde Flask para saber si la lección ya fue completada ***
+        const lessonAlreadyCompleted = {{ lesson_already_completed | default(false) | tojson }};
+        // `| tojson` es importante para que Jinja2 lo convierta correctamente a un booleano JS
+        
+        // **Nueva línea crucial:** Define la URL base para tus imágenes de letras
+        // Flask generará la ruta correcta a la carpeta 'static/letras/'
+        const imageBaseUrl = "{{ url_for('static', filename='letras/') }}";
+
+        // Referencias a elementos del DOM
+        const letraInput = document.getElementById('letraInput');
+        const imageContainer = document.getElementById('imageContainer');
+        const finishLessonBtn = document.getElementById('finishLessonBtn');
+        const dialogOverlay = document.getElementById('dialog-overlay');
+        const lessonName = 'letras'; // Nombre de la lección para enviar al backend
+
+        // Función para cambiar la imagen de la seña
+        function cambiarImagen(letra) {
+            imageContainer.innerHTML = ''; // Limpia las imágenes anteriores
+            // Crea una nueva imagen y establece su fuente
+            var nuevaImagen = document.createElement('img');
+            // Construye la ruta de la imagen: imageBaseUrl + 'mano-' + LETRA.png (ej. mano-A.png)
+            nuevaImagen.src = imageBaseUrl + 'mano-' + letra.toUpperCase() + '.png';
+            nuevaImagen.className = 'imagen-letra';
+            imageContainer.appendChild(nuevaImagen);
+        }
+
+        // Event listener para el input de texto
+        letraInput.addEventListener('input', function () {
+            imageContainer.innerHTML = ''; // Limpia las imágenes anteriores
+            var palabra = this.value.trim().toUpperCase(); // Convierte a mayúsculas para las rutas de imagen
+            for (var i = 0; i < palabra.length; i++) {
+                if (palabra[i] !== ' ') { // Ignora los espacios
+                    var nuevaImagen = document.createElement('img');
+                    // Construye la ruta de la imagen para cada letra de la palabra
+                    nuevaImagen.src = imageBaseUrl + 'mano-' + palabra[i] + '.png';
+                    nuevaImagen.className = 'imagen-letra';
+                    imageContainer.appendChild(nuevaImagen);
+                }
+            }
+        });
+
+        // Función para cerrar el diálogo
+        function closeDialog() {
+            dialogOverlay.style.display = 'none';
+        }
+
+        // --- Lógica del Diálogo al cargar la página ---
+        // Se ejecuta una vez que el DOM está cargado
+        if (lessonAlreadyCompleted) {
+            // Si la lección ya está completada, no mostrar el diálogo
+            dialogOverlay.style.display = 'none';
+            // Y actualizar el estado del botón "Finalizar" inmediatamente
+            finishLessonBtn.classList.add('completed');
+            finishLessonBtn.textContent = 'Lección Finalizada';
+            finishLessonBtn.disabled = true;
+        } else {
+            // Si la lección no está completada, mostrar el diálogo al cargar
+            dialogOverlay.style.display = 'flex';
+        }
+
+        // --- Lógica del Botón "Finalizar Lección" ---
+        finishLessonBtn.addEventListener('click', async function() {
+            // Re-verificar lessonAlreadyCompleted para asegurar que no se envíe doble si se cargó la página ya completada
+            if (lessonAlreadyCompleted || this.disabled) {
+                // No hacer nada si ya está completada o deshabilitada
+                console.log('Lección ya finalizada o botón deshabilitado. No se enviará la solicitud.');
+                return;
+            }
+
+            try {
+                // Enviar la solicitud POST al backend para marcar la lección como completada
+                const response = await fetch('/api/lessons/complete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ lesson_name: lessonName }) // Envía el nombre de la lección
+                });
+
+                // Si la respuesta no es OK (ej. 401, 500), lanzar un error para que lo capture el catch
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Error desconocido al finalizar la lección.');
+                }
+
+                const data = await response.json();
+                console.log('Respuesta del servidor al finalizar lección:', data.message);
+                
+                // Actualizar el estado visual del botón
+                this.classList.add('completed');
+                this.textContent = 'Lección Finalizada';
+                this.disabled = true; // Deshabilitar el botón para evitar clics duplicados
+                
+                // Preferible usar un modal personalizado en producción en lugar de alert()
+                alert(data.message);
+
+                // Pequeño retraso para que el usuario vea el cambio de texto antes de redirigir
+                setTimeout(() => {
+                    window.location.href = '/menu'; // Redirigir al menú principal
+                }, 500); // 500 milisegundos
+
+            } catch (error) {
+                console.error('Error al finalizar lección:', error.message);
+                // Preferible usar un modal personalizado en producción en lugar de alert()
+                alert('Hubo un problema al finalizar la lección: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

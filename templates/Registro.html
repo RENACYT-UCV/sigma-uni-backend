@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo sigma.PNG') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Sigma</title>
+</head>
+<body>
+    <div class="container">
+        <div class="right-panel">
+            <div class="log">
+                <h1>¡Sé parte de <span>Sigma</span>😊!</h1>
+                <img src="{{ url_for('static', filename='img/logo sigma.PNG') }}" alt="Logo Sigma" class="logo" />
+            </div>
+            <h2>Crea una cuenta</h2>
+            <form id="registerForm"> <!-- Agregado ID para acceder con JS -->
+                <input type="text" placeholder="Nombres" name="nombres" required>
+                <input type="text" placeholder="Apellidos" name="apellidos" required>
+                <input type="email" placeholder="Correo electrónico" name="correo" required>
+                <input type="text" placeholder="Usuario" name="usuario" required>
+                <input type="password" placeholder="Contraseña" name="contrasena" required>
+                <input type="text" name="dni" placeholder="DNI" value="">
+                <input type="date" name="fecha_nacimiento" value="2000-01-01">
+                <input type="text" name="telefono" placeholder="Telefono" value="">
+                <input type="text" name="direccion" placeholder="Dirección" value="">
+                
+                <button type="submit" class="register-btn">Crear Cuenta</button>
+
+                <p>
+                    ¿Ya tienes una cuenta? <a href="{{ url_for('login_page') }}">Iniciar Sesión</a>
+                </p>
+
+                <p>
+                    ¿Eres Administrador? <a href="/admin/login">Entrar</a>
+                </p>
+            </form>
+        </div>
+
+        <div class="left-panel">
+            <div class="centro">
+                <h1>¡Sé parte de <span>Sigma</span>😊!</h1>
+                <p>Regístrate para aprender el gran lenguaje de señas.</p>
+            </div>
+            <img src="{{ url_for('static', filename='img/Fondo.png') }}" alt="Imagen de fondo">
+            <footer>© 2025 Sigma. Todos los derechos reservados.</footer>
+        </div>
+    </div>
+
+    <script>
+        // Obtener el formulario por su ID
+        const registerForm = document.getElementById('registerForm');
+
+        // Escuchar el evento de envío del formulario
+        registerForm.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Previene el envío tradicional del formulario
+
+            // Obtener los valores de los campos de entrada
+            // Usa un objeto para recolectar todos los datos del formulario
+            const formData = new FormData(registerForm); // Recolecta todos los campos con atributo 'name'
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+
+            // Si no tienes los inputs visibles, puedes establecer valores por defecto o nulos aquí
+            data.dni = data.dni || null; // o un valor por defecto si aplica
+            data.fecha_nacimiento = data.fecha_nacimiento || null; // 'YYYY-MM-DD'
+            data.telefono = data.telefono || null;
+            data.direccion = data.direccion || null;
+
+            try {
+                // Realizar la solicitud POST a la API de registro
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json' // Indicar que estamos enviando JSON
+                    },
+                    // Convertir los datos a JSON string
+                    body: JSON.stringify(data)
+                });
+
+                // Convertir la respuesta a JSON
+                const result = await response.json();
+
+                // Verificar si la respuesta fue exitosa (código de estado 201 Created)
+                if (response.ok) {
+                    console.log('Registro exitoso:', result.message);
+                    // En un entorno de producción, usa una modal personalizada en lugar de alert
+                    alert(result.message + " Ahora puedes iniciar sesión.");
+                    // Redirigir al usuario a la página de login después del registro
+                    window.location.href = '/login';
+                } else {
+                    // Si la respuesta no fue exitosa, mostrar el mensaje de error de la API
+                    console.error('Error en el registro:', result.error);
+                    // En un entorno de producción, usa una modal personalizada en lugar de alert
+                    alert(result.error);
+                }
+            } catch (error) {
+                // Manejar errores de red o del servidor
+                console.error('Error de conexión o del servidor:', error);
+                // En un entorno de producción, usa una modal personalizada en lugar de alert
+                alert('Hubo un problema al conectar con el servidor. Inténtalo de nuevo.');
+            }
+        });
+    </script>
+</body>
+</html>

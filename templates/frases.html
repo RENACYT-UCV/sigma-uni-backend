@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Frases</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/frases.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">¡APRENDAMOS ALGUNAS FRASES!</h1>
+        <div class="image-container" id="imageContainer">
+            <img src="{{ url_for('static', filename='img/logo sigma.PNG') }}" class="imagen-letra" id="logoImagen">
+        </div>
+        <div class="menu">
+            <button class="menu-item" onclick="cambiarImagen('1')"><h3>Hola</h3></button>
+            <button class="menu-item" onclick="cambiarImagen('2')"><h3>Te amo</h3></button>
+        </div>
+    </div>
+
+    <!-- Botón de Finalizar Lección - Asegúrate de que tenga el ID 'finishLessonBtn' -->
+    <button id="finishLessonBtn" class="finish-btn">Finalizar Lección</button>
+
+    <div class="footer">
+        <div class="footer-bar">
+            <a href="{{ url_for('menu_page') }}"> <button class="footer-item">
+                    <img src="{{ url_for('static', filename='img/homa.png') }}" alt="Home">
+                </button>
+            </a>
+            <a href="http://127.0.0.1:5000/frases"> <!-- Si esta URL es para la cámara, asegúrate que sea correcta -->
+                <button class="footer-item">
+                    <img src="{{ url_for('static', filename='img/camara.png') }}" alt="Camera">
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <div id="dialog-overlay" class="overlay">
+        <div class="dialog-box">
+            <h2 class="dialog-title">Lenguaje de Señas: Frases Básicas</h2>
+            <p class="dialog-text">Aquí podrás aprender frases útiles como “hola” o “te amo”. Estas expresiones son esenciales para saludar, mostrar afecto o iniciar una conversación usando lenguaje de señas. ¡Empieza a comunicarte de forma más cercana y natural!</p>
+            <img src="{{ url_for('static', filename='img/pregunta.jpg') }}" alt="imagen de pregunta">
+            <button class="dialog-button" onclick="closeDialog()">Iniciar lección</button>
+        </div>
+    </div>
+
+    <script>
+        // *** Variable pasada desde Flask para saber si la lección ya fue completada ***
+        const lessonAlreadyCompleted = {{ lesson_already_completed | default(false) | tojson }};
+        // `| tojson` es importante para que Jinja2 lo convierta correctamente a un booleano JS
+
+        // *** Línea crucial: Define la URL base para tus imágenes de frases ***
+        const imageBaseUrl = "{{ url_for('static', filename='frases/') }}";
+
+        // Referencias a elementos del DOM
+        const imageContainer = document.getElementById('imageContainer');
+        const finishLessonBtn = document.getElementById('finishLessonBtn');
+        const dialogOverlay = document.getElementById('dialog-overlay');
+        const lessonName = 'preguntas'; // ¡Importante! Nombre de la lección para enviar al backend (según tu DB)
+
+        // Función para cambiar la imagen de la seña de la frase
+        function cambiarImagen(valor) {
+            imageContainer.innerHTML = ''; // Limpia el contenedor de imágenes
+            var nuevaImagen = document.createElement('img');
+            // Construye la ruta de la imagen: imageBaseUrl + 'mano-letra-' + VALOR + '.png'
+            nuevaImagen.src = imageBaseUrl + 'mano-frase-' + valor + '.png'; // Ajustado a 'mano-frase-' por si tus imágenes siguen este patrón
+            nuevaImagen.className = 'imagen-letra';
+            imageContainer.appendChild(nuevaImagen);
+        }
+
+        // Función para cerrar el diálogo
+        function closeDialog() {
+            dialogOverlay.style.display = 'none';
+        }
+
+        // --- Lógica del Diálogo al cargar la página ---
+        // Se ejecuta una vez que el DOM está cargado
+        if (lessonAlreadyCompleted) {
+            // Si la lección ya está completada, no mostrar el diálogo
+            dialogOverlay.style.display = 'none';
+            // Y actualizar el estado del botón "Finalizar" inmediatamente
+            finishLessonBtn.classList.add('completed');
+            finishLessonBtn.textContent = 'Lección Finalizada';
+            finishLessonBtn.disabled = true;
+        } else {
+            // Si la lección no está completada, mostrar el diálogo al cargar
+            dialogOverlay.style.display = 'flex';
+        }
+
+        // --- Lógica del Botón "Finalizar Lección" ---
+        finishLessonBtn.addEventListener('click', async function() {
+            // Re-verificar lessonAlreadyCompleted para asegurar que no se envíe doble si se cargó la página ya completada
+            if (lessonAlreadyCompleted || this.disabled) {
+                // No hacer nada si ya está completada o deshabilitada
+                console.log('Lección ya finalizada o botón deshabilitado. No se enviará la solicitud.');
+                return;
+            }
+
+            try {
+                // Enviar la solicitud POST al backend para marcar la lección como completada
+                const response = await fetch('/api/lessons/complete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ lesson_name: lessonName }) // Envía el nombre de la lección
+                });
+
+                // Si la respuesta no es OK (ej. 401, 500), lanzar un error para que lo capture el catch
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Error desconocido al finalizar la lección.');
+                }
+
+                const data = await response.json();
+                console.log('Respuesta del servidor al finalizar lección:', data.message);
+                
+                // Actualizar el estado visual del botón
+                this.classList.add('completed');
+                this.textContent = 'Lección Finalizada';
+                this.disabled = true; // Deshabilitar el botón para evitar clics duplicados
+                
+                // Preferible usar un modal personalizado en producción en lugar de alert()
+                alert(data.message);
+
+                // Pequeño retraso para que el usuario vea el cambio de texto antes de redirigir
+                setTimeout(() => {
+                    window.location.href = '/menu'; // Redirigir al menú principal
+                }, 500); // 500 milisegundos
+
+            } catch (error) {
+                console.error('Error al finalizar lección:', error.message);
+                // Preferible usar un modal personalizado en producción en lugar de alert()
+                alert('Hubo un problema al finalizar la lección: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

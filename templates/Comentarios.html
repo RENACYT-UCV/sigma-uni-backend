@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentarios - Sigma</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Comentarios.css') }}">
+</head>
+<body>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='img/logo sigma.PNG') }}" alt="Logo">
+    </div>
+    
+    <div class="container">
+        <h1 class="title">COMENTARIOS</h1>
+        <img id="imagenDinamica" src="{{ url_for('static', filename='img/notevallasSinComentar-removebg-preview.png') }}" alt="Comentarios" 
+        style="width: 200px; height: auto">
+        
+
+        <!-- Formulario para agregar comentarios -->
+        <div class="comentario-form">
+            <div class="form-header">
+                <img src="{{ url_for('static', filename='img/iconComen.png') }}" alt="Comentarios" class="form-icon">
+                <h2 class="form-title">Agregar Comentario</h2>
+            </div>
+            <form id="formComentario">
+                <div class="input-group">
+                    <div class="input-with-icon">
+                        <textarea id="comentario" name="comentario" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="boton-enviar">
+                    <img src="{{ url_for('static', filename='img/enviar.png') }}" alt="Enviar" class="btn-icon">
+                    <span class="texto">Enviar</span>
+                </button>
+                <div id="messageDisplay" class="message-container" style="display: none;"></div>
+            </form>
+        </div>
+
+        <!-- Lista de comentarios -->
+        <div class="comentarios-lista">
+            <h2 class="lista-title">Comentarios Recientes</h2>
+            <div class="comentarios-container" id="comentariosContainer">
+                <!-- Los comentarios se cargarán aquí dinámicamente -->
+                <!-- Si no hay comentarios, este contenedor permanecerá vacío -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-bar">
+            <a href="{{ url_for('menu_page') }}">
+                <button class="footer-item">
+                    <img src="{{ url_for('static', filename='img/homa.png') }}" alt="Home">
+                </button>
+            </a>
+            <a href="http://127.0.0.1:5000/alimentos"> <!-- Revisa esta URL para tu cámara de alimentos -->
+                <button class="footer-item">
+                    <img src="{{ url_for('static', filename='img/camara.png') }}" alt="Camera">
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const formComentario = document.getElementById('formComentario');
+        const comentarioTextarea = document.getElementById('comentario');
+        const comentariosContainer = document.getElementById('comentariosContainer');
+        const messageDisplay = document.getElementById('messageDisplay');
+
+        // Función para mostrar mensajes al usuario (éxito/error)
+        function showMessage(message, type) {
+            messageDisplay.textContent = message;
+            messageDisplay.className = 'message-container'; // Reiniciar clases
+            messageDisplay.classList.add('message-' + type);
+            messageDisplay.style.display = 'block';
+            setTimeout(() => {
+                messageDisplay.style.display = 'none';
+            }, 3000); // Ocultar después de 3 segundos
+        }
+
+        // Función para renderizar un comentario individual
+        function renderComment(comment) {
+            const commentItem = document.createElement('div');
+            commentItem.className = 'comentario-item';
+
+            // Obtener la inicial del usuario
+            const userInitial = comment.autor_usuario ? comment.autor_usuario.charAt(0).toUpperCase() : '?';
+
+            commentItem.innerHTML = `
+                <div class="comentario-header">
+                    <div class="avatar-initial">${userInitial}</div> <!-- NUEVO: Div para la inicial -->
+                    <div class="comentario-info">
+                        <h3 class="comentario-nombre">${comment.autor_nombre}</h3>
+                        <span class="comentario-fecha">${comment.fecha}</span>
+                    </div>
+                    <div class="comentario-rating">
+                        <!-- Puedes añadir un icono de like o rating si lo implementas en el futuro -->
+                    </div>
+                </div>
+                <p class="comentario-texto">${comment.comentario}</p>
+            `;
+            return commentItem;
+        }
+
+        // Función para cargar los comentarios desde la API
+        async function loadComments() {
+            try {
+                const response = await fetch('/api/comments', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // Las cookies HttpOnly se envían automáticamente
+                    }
+                });
+
+                // Verificar el estado de la respuesta antes de intentar parsear JSON
+                if (response.status === 204) { // 204 No Content para cuando no hay comentarios
+                    comentariosContainer.innerHTML = ''; // Asegurar que el contenedor esté vacío
+                    return; // No hay nada que parsear ni mostrar
+                }
+                
+                // Si la respuesta no es OK (ej. 401, 500), o si el tipo de contenido no es JSON, lanzar un error
+                if (!response.ok || !response.headers.get('Content-Type').includes('application/json')) {
+                    if (response.status === 401) {
+                         alert('Sesión expirada o no autorizada. Por favor, inicie sesión.'); // Usar modal personalizado
+                         window.location.href = '/login'; 
+                         return;
+                    }
+                    const errorData = await response.text(); // Obtener el texto de la respuesta para depuración
+                    console.error('Error: La respuesta del servidor no es JSON o no es OK. Status:', response.status, 'Respuesta:', errorData);
+                    // Solo mostrar mensaje de error si es un problema real del servidor
+                    showMessage('No se pudieron cargar los comentarios. Error del servidor o formato inválido.', 'error');
+                    return;
+                }
+
+                const comments = await response.json();
+                comentariosContainer.innerHTML = ''; // Limpiar comentarios existentes
+
+                // Si no hay comentarios, el contenedor simplemente queda vacío.
+                if (comments.length === 0) {
+                    // Opcional: podrías poner un mensaje como: comentariosContainer.innerHTML = '<p style="text-align: center; color: #888;">Aún no hay comentarios. ¡Sé el primero en dejar uno!</p>';
+                    // Pero la solicitud del usuario era "que no se vea nada en esa sección".
+                } else {
+                    comments.forEach(comment => {
+                        comentariosContainer.appendChild(renderComment(comment));
+                    });
+                }
+            } catch (error) {
+                console.error('Error al cargar comentarios:', error);
+                // Solo mostrar mensaje de error si es un problema de red o parseo inesperado
+                showMessage('No se pudieron cargar los comentarios. ' + error.message, 'error');
+            }
+        }
+
+        // Event listener para el envío del formulario de comentarios
+        formComentario.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const comentario = comentarioTextarea.value.trim();
+
+            if (!comentario) {
+                showMessage('El comentario no puede estar vacío.', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/comments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ comentario: comentario })
+                });
+
+                if (!response.ok) {
+                     if (response.status === 401) {
+                         alert('Sesión expirada o no autorizada. Por favor, inicie sesión.'); // Usar modal personalizado
+                         window.location.href = '/login'; 
+                         return;
+                    }
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Error al enviar el comentario.');
+                }
+
+                const data = await response.json();
+                showMessage(data.message, 'success');
+                comentarioTextarea.value = ''; // Limpiar el textarea
+                loadComments(); // Recargar la lista de comentarios para mostrar el nuevo
+            } catch (error) {
+                console.error('Error al enviar comentario:', error);
+                showMessage('No se pudo enviar el comentario. ' + error.message, 'error');
+            }
+        });
+
+        // Cargar comentarios al cargar la página
+        document.addEventListener('DOMContentLoaded', loadComments);
+    </script>
+</body>
+</html>

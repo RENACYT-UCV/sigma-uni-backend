@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{{ url_for('static', filename='img/logo sigma.PNG') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/correo.css') }}" />
+    <title>Correo Sigma</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="centro">
+                <h1>¿Quieres cambiar la Contraseña?</h1>
+                <p>
+                    Por favor ingrese su correo electrónico. Se enviará un código de verificación para el cambio de contraseña.
+                </p>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <form id="forgotPasswordForm" class="my-form"> <!-- Agregado ID al formulario -->
+                <div class="movil"> 
+                    <h1>¿Quieres cambiar la Contraseña?</h1>
+                    <p>
+                        Por favor ingrese su correo electrónico. Se enviará un código de verificación para el cambio de contraseña.
+                    </p>
+                </div>
+                <div class="text-field">
+                    <label for="email">Correo:</label>
+                    <input type="email" id="email" name="email"
+                        placeholder="Ejmp: Juares16@gmail.com"
+                        required
+                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                    </svg>
+                </div>
+                <button type="submit" class="my-form__button">Enviar</button> <!-- Cambiado a button type="submit" -->
+                <div id="messageDisplay" class="message-container" style="display: none;"></div> <!-- Para mensajes -->
+                
+                <div class="my-form__actions">
+                    <div class="my-form__row">
+                        <span>¿No tienes una cuenta en Sigma? </span>
+                        <a href="{{ url_for('register_page') }}" title="Regístrate">
+                            Regístrate
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+        const emailInput = document.getElementById('email');
+        const messageDisplay = document.getElementById('messageDisplay');
+
+        function showMessage(message, type) {
+            messageDisplay.textContent = message;
+            messageDisplay.className = 'message-container';
+            messageDisplay.classList.add('message-' + type);
+            messageDisplay.style.display = 'block';
+            // No ocultar automáticamente, el usuario debe leer el mensaje y continuar
+            // setTimeout(() => { messageDisplay.style.display = 'none'; }, 5000); 
+        }
+
+        forgotPasswordForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const email = emailInput.value.trim();
+
+            if (!email) {
+                showMessage('Por favor, ingrese su correo electrónico.', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/forgot_password_request', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage(data.message + " Redirigiendo para ingresar el código...", 'success');
+                    // Guardar el correo en sessionStorage para usarlo en la siguiente página
+                    sessionStorage.setItem('reset_email', email);
+                    // Redirigir a la página de verificación de código
+                    setTimeout(() => {
+                        window.location.href = '/verify_code';
+                    }, 2000); // Dar tiempo para que el usuario lea el mensaje
+                } else {
+                    showMessage(data.error || 'Ocurrió un error. Por favor, intente de nuevo.', 'error');
+                }
+            } catch (error) {
+                console.error('Error de red o del servidor:', error);
+                showMessage('Error de conexión. Por favor, intente de nuevo.', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

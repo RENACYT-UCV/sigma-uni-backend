@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Numerica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/numerico.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">¡APRENDAMOS A EXPRESAR LOS NÚMEROS!</h1>
+        <input type="text" id="letraInput" placeholder="">
+        <div class="cambiar">
+            <div class="image-container" id="imageContainer">
+                </div>
+
+            <div class="menu-text">
+                <div class="image-text">NÚMEROS</div>
+                <div class="menu">
+                    <button class="menu-item" onclick="cambiarImagen('1')"><h3>1</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('2')"><h3>2</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('3')"><h3>3</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('4')"><h3>4</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('5')"><h3>5</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('6')"><h3>6</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('7')"><h3>7</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('8')"><h3>8</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('9')"><h3>9</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('0')"><h3>0</h3></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón de Finalizar Lección - Modificado a <button> y con ID -->
+        <button id="finishLessonBtn" class="finish-btn">Finalizar Lección</button>
+
+        <div class="footer">
+            <div class="footer-bar">
+                <a href="{{ url_for('menu_page') }}">
+                    <button class="footer-item">
+                        <img src="{{ url_for('static', filename='img/homa.png') }}" alt="Home">
+                    </button>
+                </a>
+                <a href="http://127.0.0.1:5000/numeros"> <!-- Revisa esta URL, parece ser la misma página -->
+                    <button class="footer-item">
+                        <img src="{{ url_for('static', filename='img/camara.png') }}" alt="Camera">
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="dialog-overlay" class="overlay">
+        <div class="dialog-box">
+            <h2 class="dialog-title">Lenguaje de Señas: Números</h2>
+            <p class="dialog-text">Bienvenido, aquí aprenderás cómo se representan los números en lenguaje de señas. Al presionar un número, verás la seña correspondiente con las manos. También puedes escribir un número en una sección en blanco para ver su representación en señas. Presiona "Iniciar" para comenzar.</p>
+            <img src="{{ url_for('static', filename='img/bloques-numericos.png') }}" alt="número">
+            <button class="dialog-button" onclick="closeDialog()">Iniciar lección</button>
+        </div>
+    </div>
+
+    <script>
+        // *** Variable pasada desde Flask para saber si la lección ya fue completada ***
+        const lessonAlreadyCompleted = {{ lesson_already_completed | default(false) | tojson }};
+        // `| tojson` es importante para que Jinja2 lo convierta correctamente a un booleano JS
+
+        // *** Línea crucial: Define la URL base para tus imágenes de números ***
+        const imageBaseUrl = "{{ url_for('static', filename='numeros/') }}"; // CORREGIDO: ahora apunta a 'numeros/'
+
+        // Referencias a elementos del DOM
+        const letraInput = document.getElementById('letraInput'); // Asegúrate de que este ID exista en tu HTML
+        const imageContainer = document.getElementById('imageContainer');
+        const finishLessonBtn = document.getElementById('finishLessonBtn');
+        const dialogOverlay = document.getElementById('dialog-overlay');
+        const lessonName = 'números'; // CORREGIDO: Nombre de la lección para enviar al backend
+
+        // Función para cambiar la imagen de la seña (Números)
+        function cambiarImagen(valor) {
+            imageContainer.innerHTML = ''; // Limpiar el contenedor de imágenes
+            var nuevaImagen = document.createElement('img');
+            // Usa la URL base para construir la ruta correcta de la imagen
+            nuevaImagen.src = imageBaseUrl + 'mano-' + valor + '.png'; // CORREGIDO: Ajustado al formato de imagen de números
+            nuevaImagen.className = 'imagen-letra';
+            imageContainer.appendChild(nuevaImagen);
+        }
+
+        // Event listener para el input de texto (Números)
+        if (letraInput) { // Asegurarse de que el input exista
+            letraInput.addEventListener('input', function() {
+                var imageContainer = document.getElementById('imageContainer');
+                imageContainer.innerHTML = ''; // Limpiar el contenedor de imágenes
+                var palabra = this.value.trim();
+                for (var i = 0; i < palabra.length; i++) {
+                    // Asegurarse de que sea un número y no un espacio
+                    if (!isNaN(palabra[i]) && palabra[i] !== ' ') {
+                        var nuevaImagen = document.createElement('img');
+                        // Usa la URL base para construir la ruta correcta de cada número
+                        nuevaImagen.src = imageBaseUrl + 'mano-' + palabra[i] + '.png'; // CORREGIDO
+                        nuevaImagen.className = 'imagen-letra';
+                        imageContainer.appendChild(nuevaImagen);
+                    }
+                }
+            });
+        }
+
+
+        // Función para cerrar el diálogo
+        function closeDialog() {
+            dialogOverlay.style.display = 'none';
+        }
+
+        // --- Lógica del Diálogo al cargar la página ---
+        // Se ejecuta una vez que el DOM está cargado
+        if (lessonAlreadyCompleted) {
+            // Si la lección ya está completada, no mostrar el diálogo
+            dialogOverlay.style.display = 'none';
+            // Y actualizar el estado del botón "Finalizar" inmediatamente
+            if (finishLessonBtn) { // Asegurarse de que el botón exista
+                finishLessonBtn.classList.add('completed');
+                finishLessonBtn.textContent = 'Lección Finalizada';
+                finishLessonBtn.disabled = true;
+            }
+        } else {
+            // Si la lección no está completada, mostrar el diálogo al cargar
+            dialogOverlay.style.display = 'flex';
+        }
+
+        // --- Lógica del Botón "Finalizar Lección" ---
+        if (finishLessonBtn) { // Asegurarse de que el botón exista
+            finishLessonBtn.addEventListener('click', async function() {
+                // Re-verificar lessonAlreadyCompleted para asegurar que no se envíe doble si se cargó la página ya completada
+                if (lessonAlreadyCompleted || this.disabled) {
+                    // No hacer nada si ya está completada o deshabilitada
+                    console.log('Lección ya finalizada o botón deshabilitado. No se enviará la solicitud.');
+                    return;
+                }
+
+                try {
+                    // Enviar la solicitud POST al backend para marcar la lección como completada
+                    const response = await fetch('/api/lessons/complete', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ lesson_name: lessonName }) // Envía el nombre de la lección
+                    });
+
+                    // Si la respuesta no es OK (ej. 401, 500), lanzar un error para que lo capture el catch
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Error desconocido al finalizar la lección.');
+                    }
+
+                    const data = await response.json();
+                    console.log('Respuesta del servidor al finalizar lección:', data.message);
+                    
+                    // Actualizar el estado visual del botón
+                    this.classList.add('completed');
+                    this.textContent = 'Lección Finalizada';
+                    this.disabled = true; // Deshabilitar el botón para evitar clics duplicados
+                    
+                    // Preferible usar un modal personalizado en producción en lugar de alert()
+                    alert(data.message);
+
+                    // Pequeño retraso para que el usuario vea el cambio de texto antes de redirigir
+                    setTimeout(() => {
+                        window.location.href = '/menu'; // Redirigir al menú principal
+                    }, 500); // 500 milisegundos
+
+                } catch (error) {
+                    console.error('Error al finalizar lección:', error.message);
+                    // Preferible usar un modal personalizado en producción en lugar de alert()
+                    alert('Hubo un problema al finalizar la lección: ' + error.message);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

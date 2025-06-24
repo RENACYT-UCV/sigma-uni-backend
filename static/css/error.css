@@ -1,0 +1,99 @@
+:root {
+  --negro: #000000;
+  --blanco: #ffffff;
+  --morado: #a7a2cb;
+  --moradoOscuro: #a57ef4;
+  --azul: #004aad;
+  --AzulClaro: #006dff;
+}
+
+body {
+  background: #000000;
+  margin: 0.5;
+  padding: 0.5;
+  height: 100vh;
+}
+
+.imagen svg {
+  width: 1000px;
+  height: 500px;
+  color: red;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+h1 {
+  color: #ffffff;
+  font-size: 20px;
+  padding: 20px;
+}
+button {
+  padding: 20px 60px;
+  border-radius: 15px;
+  border: none;
+  background: var(--AzulClaro);
+  color: var(--blanco);
+  font-size: 120%;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bold;
+}
+@media screen and (max-width: 630px) {
+  h1 {
+    font-size: 16px;
+  }
+  img {
+    width: 800px;
+    height: 300px;
+  }
+}
+
+/* Estilos básicos para el cuerpo y el contenedor de error */
+body.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+.imagen svg {
+  color: #dc3545; /* Rojo para indicar error */
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+}
+h1 {
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 25px;
+}
+.container button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+}
+.container button:hover {
+  background-color: #0056b3;
+}

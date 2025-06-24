@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Sigma</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Menu.css') }}">
+</head>
+<body>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='img/logo sigma.PNG') }}" alt="Logo">
+    </div>
+    <div class="container">
+        <h1 class="title">¡APRENDAMOS JUNTOS!</h1>
+        <img id="imagenDinamica" src="{{ url_for('static', filename='img/logo sigma.PNG') }}" alt="Tabla Numerica" 
+        style="width: 300px; height: auto">
+        
+        <div class="abecedario">Opciones</div>
+
+        <div class="menu">
+            <a href="{{ url_for('numbers_lesson_page') }}"><button type="submit" class="boton">
+                <img src="{{ url_for('static', filename='img/bloques-numericos.png') }}" alt="Imagen anumerico">
+                <span class="texto">Números</span>
+            </button></a>
+            <a href="{{ url_for('letters_lesson_page') }}"><button type="submit" class="boton">
+                <img src="{{ url_for('static', filename='img/cubitos.png') }}" alt="Imagen abecedario">
+                <span class="texto">Letras</span>
+            </button></a>
+        </div>
+        <div class="menu">
+            <a href="{{ url_for('food_lesson_page') }}"><button type="submit" class="boton">
+                <img src="{{ url_for('static', filename='img/bebida.png') }}" alt="Imagen del botón 3">
+                <span class="texto">Comidas</span>
+            </button></a>
+
+            <a href="{{ url_for('phrases_lesson_page') }}"><button type="submit" class="boton">
+                <img src="{{ url_for('static', filename='img/conversacion.png') }}" alt="Imagen del botón 4">
+                <span class="texto">Preguntas</span>
+            </button></a>
+            <a href="{{ url_for('coments_page') }}"><button type="submit" class="boton">
+    <img src="{{ url_for('static', filename='img/comenatariosGrande.png') }}" alt="Comentarios">
+    <span class="texto">Comentarios</span>
+</button></a>
+        </div><br><br>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-bar">
+            <a href="{{ url_for('menu_page') }}">
+                <button class="footer-item">
+                    <img src="{{ url_for('static', filename='img/homa.png') }}" alt="Home">
+                </button>
+            </a>
+            <a href="{{ url_for('login_page') }}">
+                <button class="footer-item">
+                    <img src="{{ url_for('static', filename='img/salida.png') }}" alt="cerrar sesión" id="logoutButton">
+                </button>
+            </a>
+            <a href="http://127.0.0.1:5000/">
+                <button class="footer-item">
+                    <img src="{{ url_for('static', filename='img/camara.png') }}" alt="Camera">
+                </button>
+            </a>
+        </div>
+    </div>
+    <script>
+    // (Puedes añadir un botón de logout en Menu.html o en otras páginas)
+    // Ejemplo de cómo sería el código JS para cerrar sesión:
+    
+    document.getElementById('logoutButton').addEventListener('click', async function() {
+        try {
+            const response = await fetch('/api/logout', {
+                method: 'POST'
+            });
+            const data = await response.json();
+            if (response.ok) {
+                console.log(data.message);
+                localStorage.removeItem('user_role'); // Limpia el rol si lo guardaste
+                window.location.href = '/login'; // Redirige al login
+            } else {
+                console.error('Error al cerrar sesión:', data.error);
+                alert(data.error);
+            }
+        } catch (error) {
+            console.error('Error de red al cerrar sesión:', error);
+            alert('Error al intentar cerrar sesión.');
+        }
+    });
+    </script>
+</body>
+</html>

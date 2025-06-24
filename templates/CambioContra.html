@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{{ url_for('static', filename='img/logo sigma.PNG') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/contra.css') }}" />
+    <title>Cambiar Contraseña</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="centro">
+                <h1>Cambiar Contraseña</h1>
+                <p>
+                    Ingrese su nueva contraseña. Asegúrese de que la nueva contraseña sea segura.
+                </p>
+                <div class="regresar">
+                    <a href="{{ url_for('login_page') }}">
+                        Regresar →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <form id="resetPasswordForm" class="my-form"> <!-- Agregado ID al formulario -->
+                <div class="movil"> 
+                    <h1>Cambiar Contraseña</h1>
+                    <p>
+                        Ingrese su nueva contraseña.
+                    </p>
+                    <div class="regresar-mobile">
+                        <a href="{{ url_for('login_page') }}">
+                           Regresar →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="text-field">
+                    <label for="new_password">Nueva contraseña: </label>
+                    <input
+                        type="password"
+                        id="new_password"
+                        name="new_password"
+                        placeholder="Nueva"
+                        required
+                    >
+                    <img src="{{ url_for('static', filename='img/ver.png') }}" alt="Ver contraseña">
+                </div>
+                <div class="text-field">
+                    <label for="confirm_new_password">Confirmar nueva contraseña:</label>
+                    <input
+                        type="password"
+                        id="confirm_new_password"
+                        name="confirm_new_password"
+                        placeholder="Confirmar"
+                        required
+                    >
+                    <img src="{{ url_for('static', filename='img/ver.png') }}" alt="Ver contraseña">
+                </div>
+                
+                <button type="submit" class="my-form__button">Cambiar contraseña</button> <!-- Cambiado a button type="submit" -->
+                <div id="messageDisplay" class="message-container" style="display: none;"></div> <!-- Para mensajes -->
+            </form>
+            <div id="confirmationMessage" class="hidden">
+                <!-- Este div se puede ocultar si los mensajes se gestionan con messageDisplay -->
+            </div>
+        </div>
+    </div>
+    <script>
+        const resetPasswordForm = document.getElementById('resetPasswordForm');
+        const newPasswordInput = document.getElementById('new_password');
+        const confirmNewPasswordInput = document.getElementById('confirm_new_password');
+        const messageDisplay = document.getElementById('messageDisplay');
+        const resetTokenId = sessionStorage.getItem('reset_token_id'); // Obtener el ID del token de sessionStorage
+
+        // Redirigir si no hay reset_token_id en sessionStorage (acceso directo o flujo incorrecto)
+        if (!resetTokenId) {
+            alert('Acceso no autorizado. Por favor, inicie el proceso de recuperación de contraseña nuevamente.'); // Usar modal personalizado
+            window.location.href = '/forgot_password';
+        }
+
+        function showMessage(message, type) {
+            messageDisplay.textContent = message;
+            messageDisplay.className = 'message-container';
+            messageDisplay.classList.add('message-' + type);
+            messageDisplay.style.display = 'block';
+        }
+
+        resetPasswordForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const newPassword = newPasswordInput.value;
+            const confirmNewPassword = confirmNewPasswordInput.value;
+
+            if (newPassword !== confirmNewPassword) {
+                showMessage('Las contraseñas no coinciden.', 'error');
+                return;
+            }
+
+            if (newPassword.length < 6) { // Ejemplo de validación de longitud mínima
+                showMessage('La contraseña debe tener al menos 6 caracteres.', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/reset_password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        reset_token_id: resetTokenId,
+                        new_password: newPassword 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage(data.message + " Redirigiendo al login...", 'success');
+                    // Limpiar el token de restablecimiento de sessionStorage después de usarlo
+                    sessionStorage.removeItem('reset_token_id');
+                    
+                    setTimeout(() => {
+                        window.location.href = '/login'; // Redirigir al login
+                    }, 2000);
+                } else {
+                    showMessage(data.error || 'Ocurrió un error al cambiar la contraseña.', 'error');
+                }
+            } catch (error) {
+                console.error('Error de red o del servidor:', error);
+                showMessage('Error de conexión. Por favor, intente de nuevo.', 'error');
+            }
+        });
+    </script>
+</body>
+</html>
