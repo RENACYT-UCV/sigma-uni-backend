@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="./iconos/logo sigma.png">
   <link rel="stylesheet" href="../estilos/login.css" />
+  <meta name="login">
   <title>Login Sigma</title>
 </head>
 <body>
@@ -36,7 +37,7 @@
         <button type="submit" class="login-btn">Iniciar sesión</button>
         <p>
           ¿No tienes una cuenta? <a href="./Registro.html">Crea una nueva cuenta</a>. <br><br>
-          Eres administrador entrar a <a href="../Administrador/LoginAdministrador/loginAdmin.html">Administrador</a>
+          ¿Eres administrador? Entra a <a href="../Administrador/LoginAdministrador/loginAdmin.html">Administrador</a>
         </p>
       </form>
     </div>
@@ -62,7 +63,7 @@
 
         if (response.status === "success") {
           alert("✅ ¡Bienvenido, " + response.nombre + "!");
-          window.location.href = "./Menu.html"; // redirige a tu menú
+          window.location.href = "./Menu.html";
         } else {
           alert("❌ " + response.message);
         }

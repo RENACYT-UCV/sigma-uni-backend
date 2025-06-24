@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comentarios - Sigma</title>
+    <link rel="stylesheet" href="Comentarios.css" />
+  </head>
+  <body>
+    <div class="logo">
+      <img src="../iconos/logo sigma.PNG" alt="Logo" />
+    </div>
+
+    <div class="container">
+      <h1 class="title">COMENTARIOS</h1>
+      <img
+        id="imagenDinamica"
+        src="../iconos/notevallasSinComentar-removebg-preview.png"
+        alt="Comentarios"
+        style="width: 200px; height: auto"
+      />
+
+      <!-- Formulario para agregar comentarios -->
+      <div class="comentario-form">
+        <div class="form-header">
+          <img
+            src="../iconos/iconComen.png"
+            alt="Comentarios"
+            class="form-icon"
+          />
+          <h2 class="form-title">Agregar Comentario</h2>
+        </div>
+        <form id="formComentario">
+          <div class="input-group">
+            <div class="input-with-icon">
+              <textarea
+                id="comentario"
+                name="comentario"
+                rows="4"
+                placeholder="Escribe tu comentario aquí..."
+                required
+              ></textarea>
+            </div>
+          </div>
+          <button type="submit" class="boton-enviar">
+            <img src="../iconos/enviar.png" alt="Enviar" class="btn-icon" />
+            <span class="texto">Enviar</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Lista de comentarios -->
+      <div class="comentarios-lista">
+        <h2 class="lista-title">Comentarios Recientes</h2>
+        <div class="comentarios-container" id="comentariosContainer">
+          <!-- Comentarios de ejemplo -->
+          <div class="comentario-item">
+            <div class="comentario-header">
+              <img src="./iconos/usuario.png" alt="Usuario" class="avatar" />
+              <div class="comentario-info">
+                <h3 class="comentario-nombre">María González</h3>
+                <span class="comentario-fecha">Hace 2 horas</span>
+              </div>
+              <div class="comentario-rating">
+                <img
+                  src="../iconos/likegris.webp"
+                  alt="Like"
+                  class="like-icon"
+                />
+              </div>
+            </div>
+            <p class="comentario-texto">
+              ¡Excelente aplicación! Me ha ayudado mucho a aprender lenguaje de
+              señas. Los módulos están muy bien organizados.
+            </p>
+          </div>
+
+          <div class="comentario-item">
+            <div class="comentario-header">
+              <img src="./iconos/usuario.png" alt="Usuario" class="avatar" />
+              <div class="comentario-info">
+                <h3 class="comentario-nombre">Carlos Rodríguez</h3>
+                <span class="comentario-fecha">Hace 5 horas</span>
+              </div>
+              <div class="comentario-rating">
+                <img
+                  src="../iconos/likegris.webp"
+                  alt="Like"
+                  class="like-icon"
+                />
+              </div>
+            </div>
+            <p class="comentario-texto">
+              La sección de números es fantástica. Mi hijo está aprendiendo muy
+              rápido gracias a esta herramienta.
+            </p>
+          </div>
+
+          <div class="comentario-item">
+            <div class="comentario-header">
+              <img src="./iconos/usuario.png" alt="Usuario" class="avatar" />
+              <div class="comentario-info">
+                <h3 class="comentario-nombre">Ana Martínez</h3>
+                <span class="comentario-fecha">Hace 1 día</span>
+              </div>
+              <div class="comentario-rating">
+                <img
+                  src="../iconos/likegris.webp"
+                  alt="Like"
+                  class="like-icon"
+                />
+              </div>
+            </div>
+            <p class="comentario-texto">
+              Me encanta la sección de comidas. Es muy útil para comunicarse en
+              situaciones cotidianas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-bar">
+        <a href="../Menu.html">
+          <button class="footer-item">
+            <img src="../iconos/homa.png" alt="Home" />
+          </button>
+        </a>
+        <a href="http://127.0.0.1:5000/alimentos">
+          <button class="footer-item">
+            <img src="../iconos/camara.png" alt="Camera" />
+          </button>
+        </a>
+      </div>
+    </div>
+
+    <script src="Comentarios.js"></script>
+  </body>
+</html>

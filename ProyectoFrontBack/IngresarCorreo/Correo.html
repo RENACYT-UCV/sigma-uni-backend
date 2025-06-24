@@ -15,69 +15,26 @@
             <div class="centro">
                 <h1>¿Quieres cambiar la Contraseña?</h1>
                 <p>
-                    Por favor ingrese su correo electronico. Se enviara un codigo de verificación para el cambio de contraseña.
+                    Por favor ingrese su correo electrónico. Se enviará un código de verificación para el cambio de contraseña.
                 </p>
             </div>
         </div>
 
         <div class="right-panel">
-                <form action="correo.php" method="POST" class="my-form">
-                    <div class="movil"> 
-                        <h1>¿Quieres cambiar la Contraseña?</h1>
-                        <p>
-                            Por favor ingrese su correo electronico. Se enviara un codigo de verificación para el cambio de contraseña.
-                        </p>
-                    </div>
-                        <div class="text-field">
-                            <label for="correo">Correo:</label>
-                            <input type="email" id="email" name="email"
-                                placeholder="Ejmp: Juares16@gmail.com"
-                                required
-                            >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                            </svg>
+            <form action="correo.php" method="POST" class="my-form">
+                <div class="movil"> 
+                    <h1>¿Quieres cambiar la Contraseña?</h1>
+                    <p>
+                        Por favor ingrese su correo electrónico. Se enviará un código de verificación para el cambio de contraseña.
+                    </p>
+                </div>
 
-                        </div>
-                        <input type="submit" value="Enviar" class="my-form__button">
-                        
-                        
-                        <div class="my-form__actions">
-                            <div class="my-form__row">
-                                <p>
-                                 ¿No tienes una cuenta? <a href="../Registro.html">Registrate</a>. <br><br>
-                                 
-                                </p>
-                            </div>
-                            
-                        </div>
-                </form>
-        </div>
-    </div>
-    <script>
-document.querySelector("form").addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  const email = document.getElementById("email").value;
-
-  const res = await fetch("http://localhost:5000/enviar-codigo", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email })
-  });
-
-  const data = await res.json();
-  alert(data.message);
-
-  if (data.status === "success") {
-    // Guarda el correo para usarlo después en Codigo.html
-    localStorage.setItem("correo", email);
-
-    // Redirige a la siguiente pantalla
-    window.location.href = "../IngresarCodigo/Codigo.html";
-  }
-});
-</script>
-
-</body>
-</html>
+                <div class="text-field">
+                    <label for="correo">Correo:</label>
+                    <input type="email" id="email" name="email"
+                        placeholder="Ejmp: Juares16@gmail.com"
+                        required
+                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                    </svg>

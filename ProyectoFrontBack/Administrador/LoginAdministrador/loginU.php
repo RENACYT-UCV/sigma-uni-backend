@@ -3,21 +3,23 @@ include 'login.php';
 
 $correo = $_POST['correo']; 
 $contrasena = $_POST['contrasena']; 
-$query= "SELECT * FROM Admi WHERE correo='$correo' AND contrasena= '$contrasena'"; 
-$ejecutar = mysqli_query($conn, $query); 
 
+$query = "SELECT * FROM Admi WHERE correo='$correo' AND contrasena='$contrasena'"; 
+$ejecutar = mysqli_query($conn, $query); 
 
 if ($ejecutar->num_rows > 0) {
     // El usuario existe
+    session_start();
     $_SESSION['correo'] = $correo;
     $_SESSION['contrasena'] = $contrasena;
-    
-    
-        header("location: ../Login_Admin/administrador/home.php");
+
+    // Redirigir según la estructura actual
+    // Puedes adaptar esta lógica según tipo de usuario o entorno
+    header("location: ../LoginAdmin/administrador/home.php");
+    // O si prefieres: header("location: ../dashboardAdmin.html");
     
 } else {
     // El usuario no existe
     echo "Correo o contraseña incorrecto.";
 }
-
 ?>
