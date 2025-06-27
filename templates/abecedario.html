@@ -10,95 +10,98 @@
 <body>
     <div class="container">
         <h1 class="title">¡APRENDAMOS EL ABECEDARIO EN SEÑAS!</h1>
-        <input type="text" id="letraInput" placeholder="Escribe una palabra">
-        <div class="image-container" id="imageContainer">
-            <img src="{{ url_for('static', filename='img/logo sigma.PNG') }}" class="imagen-letra" id="logoImagen">
+            <input type="text" id="letraInput" placeholder="Escribe una palabra">
+        <div class="cambiar">
+            <div class="image-container" id="imageContainer">
+                <img src="{{ url_for('static', filename='img/logo sigma.PNG') }}" class="imagen-letra" id="logoImagen">
+            </div>
+            <div class="menu-text">
+                    <div class="image-text">ABECEDARIO</div>
+                    <div class="menu">
+                        <button class="menu-item" onclick="cambiarImagen('A')">
+                            <h3>A</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('B')">
+                            <h3>B</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('C')">
+                            <h3>C</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('D')">
+                            <h3>D</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('E')">
+                            <h3>E</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('F')">
+                            <h3>F</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('G')">
+                            <h3>G</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('H')">
+                            <h3>H</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('I')">
+                            <h3>I</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('J')">
+                            <h3>J</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('K')">
+                            <h3>K</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('L')">
+                            <h3>L</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('M')">
+                            <h3>M</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('N')">
+                            <h3>N</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('Ñ')">
+                            <h3>Ñ</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('O')">
+                            <h3>O</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('P')">
+                            <h3>P</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('Q')">
+                            <h3>Q</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('R')">
+                            <h3>R</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('S')">
+                            <h3>S</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('T')">
+                            <h3>T</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('U')">
+                            <h3>U</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('V')">
+                            <h3>V</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('W')">
+                            <h3>W</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('X')">
+                            <h3>X</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('Y')">
+                            <h3>Y</h3>
+                        </button>
+                        <button class="menu-item" onclick="cambiarImagen('Z')">
+                            <h3>Z</h3>
+                        </button>
+                    </div>
+                </div>
         </div>
-        <div class="image-text">ABECEDARIO</div>
-        <div class="menu">
-            <button class="menu-item" onclick="cambiarImagen('A')">
-                <h3>A</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('B')">
-                <h3>B</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('C')">
-                <h3>C</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('D')">
-                <h3>D</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('E')">
-                <h3>E</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('F')">
-                <h3>F</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('G')">
-                <h3>G</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('H')">
-                <h3>H</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('I')">
-                <h3>I</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('J')">
-                <h3>J</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('K')">
-                <h3>K</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('L')">
-                <h3>L</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('M')">
-                <h3>M</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('N')">
-                <h3>N</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('Ñ')">
-                <h3>Ñ</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('O')">
-                <h3>O</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('P')">
-                <h3>P</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('Q')">
-                <h3>Q</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('R')">
-                <h3>R</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('S')">
-                <h3>S</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('T')">
-                <h3>T</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('U')">
-                <h3>U</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('V')">
-                <h3>V</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('W')">
-                <h3>W</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('X')">
-                <h3>X</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('Y')">
-                <h3>Y</h3>
-            </button>
-            <button class="menu-item" onclick="cambiarImagen('Z')">
-                <h3>Z</h3>
-            </button>
-        </div>
-        
         <!-- Botón de Finalizar Lección - Asegúrate de que tenga el ID 'finishLessonBtn' -->
         <button id="finishLessonBtn" class="finish-btn">Finalizar Lección</button>
     </div>

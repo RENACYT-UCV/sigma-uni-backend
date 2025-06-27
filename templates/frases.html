@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla Frases</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/frases.css') }}">
+    <link rel="stylesheet" href="/static/css/frases.css">
 </head>
 <body>
     <div class="container">
         <h1 class="title">¡APRENDAMOS ALGUNAS FRASES!</h1>
-        <div class="image-container" id="imageContainer">
-            <img src="{{ url_for('static', filename='img/logo sigma.PNG') }}" class="imagen-letra" id="logoImagen">
+        <div class="cambiar">
+            <div class="image-container" id="imageContainer">
+                <img src="{{ url_for('static', filename='img/logo sigma.PNG') }}" class="imagen-letra" id="logoImagen">
+            </div>
+            <div class="menu">
+                <button class="menu-item" onclick="cambiarImagen('1')"><h3>Hola</h3></button>
+                <button class="menu-item" onclick="cambiarImagen('2')"><h3>Te amo</h3></button>
+            </div>
         </div>
-        <div class="menu">
-            <button class="menu-item" onclick="cambiarImagen('1')"><h3>Hola</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('2')"><h3>Te amo</h3></button>
-        </div>
-        
         <!-- Botón de Finalizar Lección - Asegúrate de que tenga el ID 'finishLessonBtn' -->
         <button id="finishLessonBtn" class="finish-btn">Finalizar Lección</button>
     </div>
@@ -32,15 +33,6 @@
                     <img src="{{ url_for('static', filename='img/camara.png') }}" alt="Camera">
                 </button>
             </a>
-        </div>
-    </div>
-
-    <div id="dialog-overlay" class="overlay">
-        <div class="dialog-box">
-            <h2 class="dialog-title">Lenguaje de Señas: Frases Básicas</h2>
-            <p class="dialog-text">Aquí podrás aprender frases útiles como “hola” o “te amo”. Estas expresiones son esenciales para saludar, mostrar afecto o iniciar una conversación usando lenguaje de señas. ¡Empieza a comunicarte de forma más cercana y natural!</p>
-            <img src="{{ url_for('static', filename='img/pregunta.jpg') }}" alt="imagen de pregunta">
-            <button class="dialog-button" onclick="closeDialog()">Iniciar lección</button>
         </div>
     </div>
 
