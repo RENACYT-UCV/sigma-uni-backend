@@ -2,14 +2,27 @@
 import os
 import random # Para generar códigos aleatorios
 import string # Para caracteres de código
-from flask import Flask, jsonify, render_template, request, make_response, url_for, redirect
+from flask import Flask, jsonify, render_template, request, make_response, url_for, redirect, send_from_directory
 from dotenv import load_dotenv
 from flask_mysqldb import MySQL
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 import jwt
+import pymysql
 from datetime import datetime, timedelta
 from functools import wraps
+from dotenv import load_dotenv
+load_dotenv()
+
+def get_db_connection():
+    return pymysql.connect(
+        host=os.getenv("MYSQL_HOST", "localhost"),
+        user=os.getenv("MYSQL_USER", "root"),
+        password=os.getenv("MYSQL_PASSWORD", ""),
+        database=os.getenv("MYSQL_DB", "sigma_db"),
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
 
 # Cargar las variables de entorno del archivo .env
 load_dotenv()
@@ -116,7 +129,7 @@ def register_page():
 
 @app.route('/login')
 def login_page():
-    return render_template('Login.html')
+    return render_template('login.html')
 
 @app.route('/menu')
 @jwt_required 
@@ -171,10 +184,19 @@ def change_password_form_page():
     return render_template('CambioContra.html')
 
 
+
 @app.route('/admin/dashboard')
-@jwt_required 
-def admin_dashboard_page():
-    return render_template('dashboardAdmin.html')
+def serve_admin_dashboard():
+    path = os.path.join(app.root_path, 'ProyectoFrontBack', 'Administrador')
+    return send_from_directory(path, 'dashboardAdmin.html')
+
+@app.route('/admin/static/<path:filename>')
+def admin_static_files(filename):
+    return send_from_directory(
+        os.path.join(app.root_path, 'ProyectoFrontBack', 'Administrador'),
+        filename
+    )
+
 
 @app.route('/admin/manage_users')
 @jwt_required
@@ -233,7 +255,7 @@ def register_user():
             return jsonify({"error": "El correo electrónico o el nombre de usuario ya están registrados."}), 409
 
         sql = """INSERT INTO usuarios (nombres, apellidos, correo, usuario, contrasena, dni, fecha_nacimiento, telefono, direccion)
-                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         cur.execute(sql, (nombres, apellidos, correo, usuario, hashed_password, dni, fecha_nacimiento, telefono, direccion))
         
         mysql.connection.commit()
@@ -248,21 +270,24 @@ def register_user():
 @app.route('/api/login', methods=['POST'])
 def login_user():
     data = request.get_json()
-    
+
     username_or_email = data.get('username_or_email')
     password = data.get('password')
-    
+
     if not (username_or_email and password):
         return jsonify({"error": "Usuario/Correo y Contraseña son requeridos."}), 400
-        
+
     try:
         cur = mysql.connection.cursor()
-        
-        cur.execute("SELECT id, usuario, correo, contrasena, rol, estado FROM usuarios WHERE usuario = %s OR correo = %s", 
-                    (username_or_email, username_or_email))
+
+        cur.execute("""
+            SELECT id, usuario, correo, contrasena, rol, estado 
+            FROM usuarios 
+            WHERE usuario = %s OR correo = %s
+        """, (username_or_email, username_or_email))
         user = cur.fetchone()
         cur.close()
-        
+
         if user:
             if bcrypt.check_password_hash(user['contrasena'], password):
                 payload = {
@@ -270,36 +295,43 @@ def login_user():
                     'username': user['usuario'],
                     'email': user['correo'],
                     'role': user['rol'],
-                    'exp': datetime.utcnow() + timedelta(hours=24), # Token expira en 24 horas
+                    'exp': datetime.utcnow() + timedelta(hours=24),
                     'iat': datetime.utcnow()
                 }
+
+                # Codificar el token y asegurarse de que es un string
                 token = jwt.encode(payload, app.config['SECRET_KEY'], algorithm='HS256')
-                
+                if isinstance(token, bytes):
+                    token = token.decode('utf-8')
+
+                # Crear la respuesta con la cookie JWT
                 response = make_response(jsonify({
-                    "message": "Inicio de sesión exitoso!", 
-                    "user_id": user['id'], 
+                    "message": "Inicio de sesión exitoso!",
+                    "user_id": user['id'],
                     "username": user['usuario'],
                     "role": user['rol']
                 }), 200)
 
                 response.set_cookie(
-                    'token', 
-                    token, 
-                    httponly=True, 
-                    secure=False, # PONER EN TRUE EN PRODUCCIÓN CON HTTPS
-                    max_age=timedelta(hours=24), 
+                    'token',
+                    token,
+                    httponly=True,
+                    secure=False,  # ✅ en producción: True con HTTPS
+                    max_age=86400,  # 24 horas
                     samesite='Lax'
                 )
-                
+
                 return response
             else:
                 return jsonify({"error": "Credenciales inválidas."}), 401
         else:
             return jsonify({"error": "Credenciales inválidas."}), 401
-            
+
     except Exception as e:
         print(f"Error al iniciar sesión: {e}")
         return jsonify({"error": "Error interno del servidor al iniciar sesión."}), 500
+
+
 
 @app.route('/api/lessons/complete', methods=['POST'])
 @jwt_required 
@@ -425,7 +457,7 @@ def forgot_password_request():
 
         # Enviar el correo electrónico
         msg = Message("Recuperación de Contraseña - Código de Verificación",
-                      recipients=[email])
+                    recipients=[email])
         msg.body = (f"Hola {username},\n\n"
                     f"Tu código de verificación para cambiar tu contraseña es: {verification_code}\n\n"
                     "Este código expirará en 15 minutos.\n"
@@ -536,21 +568,116 @@ def reset_password():
         print(f"Error al restablecer contraseña: {e}")
         return jsonify({"error": "Error interno del servidor al restablecer la contraseña."}), 500
 
-# --- Ruta de ejemplo protegida ---
-@app.route('/api/protected_resource')
-@jwt_required
-def protected_resource():
-    return jsonify({
-        "message": "Acceso concedido a recurso protegido!",
-        "user_info": request.user 
-    }), 200
+
+@app.route('/api/dashboard/puntajes')
+def dashboard_puntajes():
+    modo = request.args.get("modo", "semana")
+
+    formatos = {
+        "semana": "%Y-%m-%d",
+        "mes": "%Y-%m",
+        "año": "%Y"
+    }
+
+    formato = formatos.get(modo, "%Y-%m-%d")  # Default diario
+
+    try:
+        connection = get_db_connection()
+        with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute("""
+                SELECT DATE_FORMAT(fecha_completado, %s) AS fecha, COUNT(*) AS cantidad
+                FROM lecciones_usuario
+                WHERE completado = TRUE
+                GROUP BY fecha
+                ORDER BY fecha
+            """, (formato,))
+            resultados = cursor.fetchall()
+        connection.close()
+        return jsonify([{"fecha": r["fecha"], "cantidad": r["cantidad"]} for r in resultados])
+    except Exception as e:
+        print("Error en /api/dashboard/puntajes:", e)
+        return jsonify({"error": "No se pudo cargar los puntajes"}), 500
+
+
+    # Obtener el formato correspondiente, si no existe usa el diario
+    formato = formatos.get(modo, "%Y-%m-%d")
+
+    # Conexión a la base de datos
+    connection = get_db_connection()
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+
+    # Consulta con parámetro de formato
+    cursor.execute("""
+        SELECT DATE_FORMAT(fecha_completado, %s) AS fecha, COUNT(*) AS cantidad
+        FROM lecciones_usuario
+        WHERE completado = TRUE
+        GROUP BY fecha
+        ORDER BY fecha
+    """, (formato,))
+
+    resultados = cursor.fetchall()
+
+    # Convertir a JSON con claves
+    datos = [{"fecha": fila["fecha"], "cantidad": fila["cantidad"]} for fila in resultados]
+
+    connection.close()
+    return jsonify(datos)
+
+@app.route('/api/dashboard/usuarios')
+def usuarios_dashboard():
+    modo = request.args.get('modo', 'diario')
+
+    if modo == 'diario':
+        agrupador = "%Y-%m-%d"
+    elif modo == 'semanal':
+        agrupador = "%Y-%u"  # Año y número de semana
+    elif modo == 'mensual':
+        agrupador = "%Y-%m"
+    else:
+        return jsonify({"error": "Modo inválido"}), 400
+
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(f"""
+                SELECT DATE_FORMAT(fecha_registro, %s) AS fecha, COUNT(*) AS cantidad
+                FROM usuarios
+                GROUP BY fecha
+                ORDER BY fecha ASC
+            """, (agrupador,))
+            resultados = cursor.fetchall()
+
+        # Verificamos si los resultados tienen formato correcto
+        datos = [{"fecha": fila["fecha"], "cantidad": fila["cantidad"]} for fila in resultados]
+        return jsonify(datos)
+    
+    except Exception as e:
+        print(f"Error en /api/dashboard/usuarios: {e}")
+        return jsonify({"error": "Error interno"}), 500
+ 
 
 # --- Ruta para cerrar sesión (eliminar la cookie) ---
 @app.route('/api/logout', methods=['POST'])
 def logout_user():
     response = make_response(jsonify({"message": "Sesión cerrada exitosamente."}), 200)
-    response.set_cookie('token', '', expires=0, httponly=True, secure=False, samesite='Lax') # Borra la cookie
+    response.set_cookie('token', '', expires=0, httponly=True, secure=False, samesite='Lax')
     return response
+
+@app.route('/api/usuarios')
+def obtener_usuarios():
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT CONCAT(nombres, ' ', apellidos) AS nombre, correo AS email, rol 
+                FROM usuarios
+            """)
+            usuarios = cursor.fetchall()
+        connection.close()
+        return jsonify(usuarios)
+    except Exception as e:
+        print("Error al obtener usuarios:", e)
+        return jsonify({"error": "No se pudo obtener usuarios"}), 500
 
 
 # Esta parte asegura que la aplicación se ejecute solo si este script es el principal

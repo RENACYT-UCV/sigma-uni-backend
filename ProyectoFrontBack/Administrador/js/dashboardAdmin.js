@@ -1,364 +1,168 @@
-// DOM Elements
-const sidebar = document.getElementById('sidebar');
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileOverlay = document.getElementById('mobileOverlay');
-const navLinks = document.querySelectorAll('.nav-link');
-const contentAreas = document.querySelectorAll('.content-area');
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOMContentLoaded cargado");
 
-// Utility Functions
-const debounce = (func, wait) => {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-};
+    // Elementos del DOM
+    const sidebar = document.getElementById('sidebar');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const contentAreas = document.querySelectorAll('.content-area');
+    const usuariosCounter = document.querySelector('.stat-number');
 
-// Sidebar Functions
-const toggleSidebar = () => {
-    sidebar.classList.toggle('active');
-    mobileOverlay.classList.toggle('active');
-    document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
-};
-
-const closeSidebar = () => {
-    sidebar.classList.remove('active');
-    mobileOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-};
-
-// Navigation Functions
-const switchContent = (targetSection) => {
-    // Hide all content areas
-    contentAreas.forEach(area => {
-        area.classList.add('hidden');
-    });
-    
-    // Show target content area
-    const targetContent = document.getElementById(targetSection + 'Content');
-    if (targetContent) {
-        targetContent.classList.remove('hidden');
+    // Función para obtener datos desde un endpoint
+    async function fetchData(endpoint) {
+        const res = await fetch(endpoint);
+        if (!res.ok) throw new Error(`Error en la petición: ${res.status}`);
+        return await res.json();
     }
-    
-    // Update active nav item
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    
-    const activeNavItem = document.querySelector(`[data-section="${targetSection}"]`).closest('.nav-item');
-    if (activeNavItem) {
-        activeNavItem.classList.add('active');
-    }
-    
-    // Update page title
-    const pageTitle = document.querySelector('.page-title');
-    const sectionTitles = {
-        dashboard: 'Dashboard',
-        usuarios: 'Gestión de Usuarios',
-        lecciones: 'Gestión de Lecciones',
-        progreso: 'Seguimiento de Progreso',
-        reportes: 'Reportes y Análisis',
-        configuracion: 'Configuración del Sistema'
-    };
-    
-    pageTitle.textContent = sectionTitles[targetSection] || 'Dashboard';
-    
-    // Close sidebar on mobile after navigation
-    if (window.innerWidth <= 768) {
-        closeSidebar();
-    }
-};
 
-// Animation Functions
-const animateCounter = (element, target, duration = 2000) => {
-    const start = 0;
-    const increment = target / (duration / 16);
-    let current = start;
-    
-    const timer = setInterval(() => {
-        current += increment;
-        element.textContent = Math.floor(current);
-        
-        if (current >= target) {
-            element.textContent = target;
-            clearInterval(timer);
-        }
-    }, 16);
-};
-
-const animateCounters = () => {
-    const counters = document.querySelectorAll('.stat-number');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = parseInt(entry.target.dataset.target);
-                animateCounter(entry.target, target);
-                observer.unobserve(entry.target);
+    // Contador animado
+    function animarContador(element, target) {
+        let current = 0;
+        const step = target / 100;
+        const interval = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                element.textContent = target;
+                clearInterval(interval);
+            } else {
+                element.textContent = Math.floor(current);
             }
-        });
-    });
-    
-    counters.forEach(counter => {
-        observer.observe(counter);
-    });
-};
+        }, 15);
+    }
 
-// Chart Functions
-const initializeCharts = () => {
-    // Scores Chart (Bar Chart)
-    const scoresCtx = document.getElementById('scoresChart');
-    if (scoresCtx) {
-        const scoresChart = new Chart(scoresCtx.getContext('2d'), {
-            type: 'bar',
+    // Construir gráfico
+    function buildChart(ctx, label, labels, data, color, type = 'line') {
+        return new Chart(ctx, {
+            type: type,
             data: {
-                labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+                labels: labels,
                 datasets: [{
-                    label: 'Puntaje Promedio',
-                    data: [75, 82, 68, 90, 85, 78, 88],
-                    backgroundColor: 'rgba(52, 152, 219, 0.8)',
-                    borderColor: 'rgba(52, 152, 219, 1)',
+                    label: label,
+                    data: data,
+                    backgroundColor: color + '33',
+                    borderColor: color,
                     borderWidth: 2,
-                    borderRadius: 8,
-                    borderSkipped: false,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(44, 62, 80, 0.9)',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff',
-                        borderColor: 'rgba(52, 152, 219, 1)',
-                        borderWidth: 1,
-                        cornerRadius: 8,
-                        displayColors: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.1)'
-                        },
-                        ticks: {
-                            color: '#7f8c8d'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            color: '#7f8c8d'
-                        }
-                    }
-                },
-                animation: {
-                    duration: 2000,
-                    easing: 'easeInOutQuart'
-                }
-            }
-        });
-    }
-    
-    // Users Chart (Line Chart)
-    const usersCtx = document.getElementById('usersChart');
-    if (usersCtx) {
-        const usersChart = new Chart(usersCtx.getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                datasets: [{
-                    label: 'Usuarios Activos',
-                    data: [120, 190, 300, 500, 200, 300, 450, 600, 750, 900, 1100, 1247],
-                    borderColor: 'rgba(39, 174, 96, 1)',
-                    backgroundColor: 'rgba(39, 174, 96, 0.1)',
-                    borderWidth: 3,
+                    tension: 0.3,
                     fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: 'rgba(39, 174, 96, 1)',
-                    pointBorderColor: '#ffffff',
-                    pointBorderWidth: 2,
-                    pointRadius: 6,
-                    pointHoverRadius: 8
+                    pointRadius: 4
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(44, 62, 80, 0.9)',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff',
-                        borderColor: 'rgba(39, 174, 96, 1)',
-                        borderWidth: 1,
-                        cornerRadius: 8,
-                        displayColors: false
-                    }
-                },
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.1)'
-                        },
-                        ticks: {
-                            color: '#7f8c8d'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            color: '#7f8c8d'
-                        }
-                    }
-                },
-                animation: {
-                    duration: 2000,
-                    easing: 'easeInOutQuart'
+                    y: { beginAtZero: true }
                 }
             }
         });
     }
-};
 
-// Search Functionality
-const initializeSearch = () => {
-    const searchInput = document.querySelector('.search-box input');
-    
-    if (searchInput) {
-        const debouncedSearch = debounce((query) => {
-            console.log('Buscando:', query);
-            // Aquí puedes implementar la lógica de búsqueda
-        }, 300);
-        
-        searchInput.addEventListener('input', (e) => {
-            debouncedSearch(e.target.value);
-        });
-    }
-};
+    // Cargar gráfico de usuarios y puntajes
+    async function cargarGraficosDashboard() {
+        try {
+            const modoPuntaje = 'semana';
+            const modoUsuarios = 'mensual';
 
-// Event Listeners
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize components
-    animateCounters();
-    initializeCharts();
-    initializeSearch();
-    
-    // Mobile menu events
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', toggleSidebar);
-    }
-    
-    if (mobileOverlay) {
-        mobileOverlay.addEventListener('click', closeSidebar);
-    }
-    
-    // js/dashboardAdmin.js
+            const datosPuntaje = await fetchData(`/api/dashboard/puntajes?modo=${modoPuntaje}`);
+            const datosUsuarios = await fetchData(`/api/dashboard/usuarios?modo=${modoUsuarios}`);
 
-// Navigation events
-const navLinks = document.querySelectorAll('.nav-link');
+            const fechasPuntaje = datosPuntaje.map(d => d.fecha);
+            const valoresPuntaje = datosPuntaje.map(d => d.cantidad);
 
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        
-        // Si es un enlace externo (a otra página), permitir navegación normal
-        if (href && href.endsWith('.html')) {
-            // Permitir navegación normal
-            return;
+            const fechasUsuarios = datosUsuarios.map(d => d.fecha);
+            const valoresUsuarios = datosUsuarios.map(d => d.cantidad);
+
+            buildChart(document.getElementById('scoresChart'), 'Puntajes completados', fechasPuntaje, valoresPuntaje, '#4e73df');
+            buildChart(document.getElementById('usersChart'), 'Usuarios nuevos', fechasUsuarios, valoresUsuarios, '#1cc88a');
+        } catch (error) {
+            console.error("Error al cargar gráficos:", error);
         }
-        
-        // Si es navegación interna, prevenir default y cambiar sección
-        e.preventDefault();
-        const section = link.dataset.section;
-        if (section) {
-            switchContent(section);
-        }
-    });
-});
-
-function switchContent(section) {
-    const sections = document.querySelectorAll('.content-section');
-    sections.forEach(s => s.classList.remove('active'));
-
-    const targetSection = document.getElementById(section);
-    if (targetSection) {
-        targetSection.classList.add('active');
     }
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Logout button
-    const logoutBtn = document.querySelector('.logout-btn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (confirm('¿Está seguro de que desea cerrar sesión?')) {
-                // Aquí puedes añadir la lógica de logout
-                // Por ejemplo, limpiar localStorage, redirigir a login, etc.
-                alert('Sesión cerrada exitosamente');
-                // window.location.href = 'login.html'; // Descomenta cuando tengas página de login
+    // Cargar tabla de usuarios
+    async function cargarUsuarios() {
+        try {
+            const data = await fetchData('/api/usuarios');
+            console.log("Usuarios:", data);
+
+            if (!Array.isArray(data)) {
+                throw new Error("La respuesta no es una lista de usuarios");
             }
-        });
-    }
-});
-    
-    // Chart filter events
-    document.querySelectorAll('.chart-filter').forEach(filter => {
-        filter.addEventListener('change', (e) => {
-            console.log(`Filtro cambiado a: ${e.target.value}`);
-            // Aquí puedes implementar la lógica para actualizar los gráficos
-        });
-    });
-    
-    // Responsive handling
-    const handleResize = debounce(() => {
-        if (window.innerWidth > 768) {
-            closeSidebar();
-        }
-    }, 250);
-    
-    window.addEventListener('resize', handleResize);
-    
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-        // Escape to close sidebar on mobile
-        if (e.key === 'Escape') {
-            closeSidebar();
-        }
-        
-        // Ctrl/Cmd + K for search focus (only on desktop)
-        if ((e.ctrlKey || e.metaKey) && e.key === 'k' && window.innerWidth > 768) {
-            e.preventDefault();
-            const searchInput = document.querySelector('.search-box input');
-            if (searchInput) {
-                searchInput.focus();
-            }
-        }
-    });
-});
 
-// Export functions for potential use
-window.SigmaAdmin = {
-    switchContent,
-    toggleSidebar,
-    closeSidebar
-};
+            const tabla = document.getElementById('tablaUsuarios');
+            tabla.innerHTML = "";
+            data.forEach(usuario => {
+                tabla.innerHTML += `
+                    <tr>
+                        <td>${usuario.nombre}</td>
+                        <td>${usuario.email}</td>
+                    </tr>
+                `;
+            });
+
+            // Contador de usuarios
+            if (usuariosCounter && !isNaN(data.length)) {
+                animarContador(usuariosCounter, data.length);
+            }
+
+        } catch (err) {
+            console.error("Error al cargar usuarios:", err);
+        }
+    }
+
+    // Mostrar sección
+    const switchContent = (targetSection) => {
+        contentAreas.forEach(area => area.classList.add('hidden'));
+        const targetContent = document.getElementById(targetSection + 'Content');
+        if (targetContent) targetContent.classList.remove('hidden');
+
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        const activeNavItem = document.querySelector(`[data-section="${targetSection}"]`)?.closest('.nav-item');
+        if (activeNavItem) activeNavItem.classList.add('active');
+
+        const pageTitle = document.querySelector('.page-title');
+        const sectionTitles = {
+            dashboard: 'Dashboard',
+            usuarios: 'Gestión de Usuarios',
+            lecciones: 'Gestión de Lecciones',
+            progreso: 'Seguimiento de Progreso',
+            reportes: 'Reportes y Análisis',
+            configuracion: 'Configuración del Sistema'
+        };
+        pageTitle.textContent = sectionTitles[targetSection] || 'Dashboard';
+
+        if (targetSection === 'usuarios') cargarUsuarios();
+        if (window.innerWidth <= 768) closeSidebar();
+    };
+
+    // Sidebar
+    const toggleSidebar = () => {
+        sidebar.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+    };
+
+    const closeSidebar = () => {
+        sidebar.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    // Listeners
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = link.getAttribute('data-section');
+            if (section) switchContent(section);
+        });
+    });
+
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleSidebar);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeSidebar);
+
+    // Inicial
+    switchContent('dashboard');
+    cargarUsuarios();
+    cargarGraficosDashboard();
+});
