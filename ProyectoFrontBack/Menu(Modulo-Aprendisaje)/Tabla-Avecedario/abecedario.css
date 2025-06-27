@@ -21,6 +21,13 @@ body {
     margin-bottom: 100px;
 }
 
+.cambiar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
 .title {
     font-size: 3.3em;
     margin-bottom: 10px;
@@ -54,6 +61,12 @@ input {
     border-radius: 100px;
 }
 
+.menu-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .image-text {
     color: #fff;
     font-size: 1.5em;
@@ -62,7 +75,25 @@ input {
     position: relative;
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
 }
+
+.finish{
+    border-radius: 5px;
+    width: 200px;
+    margin-top: 20px;
+    background: inherit;
+    font-size: 2em;
+    color: white;
+    box-shadow: 0 4px 6px rgb(255, 255, 255);
+    transition: transform 0.1s;
+    margin-bottom: 30px;
+}
+
+.finish:hover{
+    transform: scale(1.35);
+}
+
 
 .footer::before,
 .footer::after {
@@ -236,6 +267,11 @@ input {
 }
 
 @media (max-width: 768px) {
+
+    .cambiar{
+        flex-direction: column;
+    }
+
     .title {
         font-size: 2.5em;
     }

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,18 +12,26 @@
     <div class="container">
         <h1 class="title">¡APRENDAMOS A EXPRESAR LOS ALIMENTOS!</h1>
         <input type="text" placeholder="Haz click en el Alimento a aprender">
-        <div class="image-container" id="imageContainer">
-            <img id="imagenDinamica" src="../iconos/logo sigma.PNG" alt="Alimento error imagen">
+
+        <div class="cambiar">
+
+            <div class="image-container" id="imageContainer">
+                <img id="imagenDinamica" src="../iconos/logo sigma.PNG" alt="Alimento error imagen">
+            </div>
+
+            <div class="menu-text">
+                <div class="image-text">ALIMENTOS</div>
+                <div class="menu">
+                    <button class="menu-item" onclick="cambiarImagen('Ajo')"><h3>ajo</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('Cebolla')"><h3>cebolla</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('Uva')"><h3>uva</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('Cereza')"><h3>cereza</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('Chile')"><h3>chile</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('Tomate')"><h3>tomate</h3></button>
+                </div>
+            </div>
         </div>
-        <div class="image-text">ALIMENTOS</div>
-        <div class="menu">
-            <button class="menu-item" onclick="cambiarImagen('Ajo')"><h3>ajo</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('Cebolla')"><h3>cebolla</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('Uva')"><h3>uva</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('Cereza')"><h3>cereza</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('Chile')"><h3>chile</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('Tomate')"><h3>tomate</h3></button>
-        </div>
+        <a href="../Menu.html"><button class="finish">Finalizar</button></a>
     </div>
 
     <div id="dialog-overlay" class="overlay">

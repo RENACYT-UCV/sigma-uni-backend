@@ -9,15 +9,20 @@
 <body>
     <div class="container">
         <h1 class="title">¡APRENDAMOS ALGUNAS FRASES!</h1>
-        <div class="image-container" id="imageContainer">
-            <img src="../iconos/logo sigma.PNG" class="imagen-letra" id="logoImagen">
-        </div>
-        <div class="menu">
-            <button class="menu-item" onclick="cambiarImagen('1')"><h3>Hola</h3></button>
-            <button class="menu-item" onclick="cambiarImagen('2')"><h3>Te amo</h3></button>
-        </div>
+        <div class="cambiar">
+                <div class="image-container" id="imageContainer">
+                    <img src="../iconos/logo sigma.PNG" class="imagen-letra" id="logoImagen">
+                </div>
+                <div class="menu">
+                    <button class="menu-item" onclick="cambiarImagen('1')"><h3>Hola</h3></button>
+                    <button class="menu-item" onclick="cambiarImagen('2')"><h3>Te amo</h3></button>
+                </div>
+            </div>
+<a href="../Menu.html"><button class="finish">Finalizar</button></a>
     </div>
+
     
+
     <div class="footer">
         <div class="footer-bar">
             <a href="../Menu.html">
@@ -42,6 +47,18 @@
     </div>
 
     <script>
+
+
+        const btn = document.querySelectorAll(".menu-item");
+        const cambiar = document.querySelector(".cambiar");
+
+        btn.forEach(btn => {
+            btn.addEventListener("click", () => {
+                cambiar.classList.add("toggle")
+            })
+        });
+
+
         function cambiarImagen(valor) {
             var imageContainer = document.getElementById('imageContainer');
             imageContainer.innerHTML = ''; 
