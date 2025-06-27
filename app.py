@@ -129,7 +129,7 @@ def register_page():
 
 @app.route('/login')
 def login_page():
-    return render_template('login.html')
+    return render_template('Login.html')
 
 @app.route('/menu')
 @jwt_required 
