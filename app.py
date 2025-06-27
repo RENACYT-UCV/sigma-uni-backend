@@ -681,6 +681,6 @@ def obtener_usuarios():
 
 
 # Esta parte asegura que la aplicación se ejecute solo si este script es el principal
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
 
